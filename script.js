@@ -74,6 +74,9 @@ let player1Y = -150;
 let player2X = 100;
 let player2Y = 100;
 
+
+
+
 function draw() {
   player1(player1X, player1Y);
   player2(player2X, player2Y);
