@@ -30,6 +30,13 @@ let p1Width = 20;
 let p1Height = 35;
 let player1;
 
+//player2
+let p2X = 20;
+let p2Y = 50;
+let p2Width = 20;
+let p2Height = 35;
+let player2;
+
 
 
 //boxes (floors)
@@ -58,7 +65,6 @@ function game() {
 
   //ground floor
   push();
-  noStroke();
   fill(255, 255, 255);
   rect(0, 680, 1200, 20);
   pop();
@@ -70,13 +76,20 @@ function game() {
   rect(p1X, p1Y, p1Width, p1Height);
   pop();
 
-  //window frame
+  //Player2 - seed character
   push();
-  noFill();
-  stroke(0, 0, 255);
-  strokeWeight(10);
-  rect(0, 0, 1200, 698);
+  fill(0, 0, 255);
+  triangle();
+  rect(p2X, p2Y, p2Width, p2Height);
   pop();
+
+  // //window frame
+  // push();
+  // noFill();
+  // stroke(0, 0, 255);
+  // strokeWeight(10);
+  // rect(0, 0, 1200, 698);
+  // pop();
 
   //collisions with the floor "boxes"
   /* if //if I'm on the box
@@ -99,7 +112,11 @@ function checkCollision() {
       p1Y + p1Height > rectangle.y &&
       p1Y < rectangle.y + rectangle.height &&
       p1X + p1Width > rectangle.x &&
-      p1X < rectangle.x + rectangle.width
+      p1X < rectangle.x + rectangle.width ||
+      p2Y + p2Height > rectangle.y &&
+      p2Y < rectangle.y + rectangle.height &&
+      p2X + p2Width > rectangle.x &&
+      p2X < rectangle.x + rectangle.width
     ) {
       return true;
     }
@@ -113,9 +130,11 @@ function gravity() {
   console.log(p1Y, p1X, checkCollision());
   //if the player is above the ground, it should keep falling
   //...and if the same time, I dont press the up key ...
+  console.log(p2Y, p2X, checkCollision());
 
+  
   //gravity
-  if (jump == false && p1Y + p1Height < minHeight && !checkCollision()) {
+  if (jump == false && p1Y + p1Height < minHeight && p2Y + p2Height < minHeight && !checkCollision()) {
     velocity = fallingSpeed; //??
     direction = 1;
   }
@@ -149,6 +168,12 @@ function gravity() {
   if (checkCollision()) {
     p1Y = p1Y - direction * velocity; //it makes it fall - without any modifications, it falls constantly
   }
+
+  p2Y = p2Y + direction * velocity; //it makes it fall - without any modifications, it falls constantly
+  if (checkCollision()) {
+    p2Y = p2Y - direction * velocity; //it makes it fall - without any modifications, it falls constantly
+  }
+
 }
 
 ///PRELOAD
@@ -162,6 +187,7 @@ function draw() {
   //call functions
   //game stage
   game();
+
   //moving player1
   if (keyIsDown(37)) {
     //moving player1 - left
@@ -183,6 +209,29 @@ function draw() {
     //if I dont press the up key, jump will be false-> the player wont jump
     jump = false;
   }
+
+  //moving player2
+  if (keyIsDown(65)) {
+    //moving player2 - left
+    p2X = p2X - 4;
+    if (checkCollision()) {
+      p2X = p2X + 4;
+    }
+  } else if (keyIsDown(68)) {
+    //moving player2 - right
+    p2X = p2X + 4;
+    if (checkCollision()) {
+      p2X = p2X - 4;
+    }
+  }
+  if (keyIsDown(87)) {
+    //if I press the up key, jump will be true -> the player will jump
+    jump = true;
+  } else {
+    //if I dont press the up key, jump will be false-> the player wont jump
+    jump = false;
+  }
+
   //gravity
   gravity();
   // Display the rectangle
