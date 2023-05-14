@@ -6,7 +6,15 @@ function setup() {
     new Rectangle(100, 550, 1100, 20),
     new Rectangle(0, 420, 1100, 20),
     new Rectangle(100, 290, 200, 20),
-    
+    new Rectangle(400, 290, 200, 20),
+    new Rectangle(700, 290, 500, 20),
+    new Rectangle(300, 290, 20, 130),
+    new Rectangle(600, 290, 20, 130),
+    new Rectangle(0, 160, 1100, 20),
+    new Rectangle(0, -15, 1200, 20),  //top border
+    new Rectangle(-15, 0, 20, 700),   //left border
+    new Rectangle(1195, 0, 20, 700),   //right border
+
   ];
 }
 
@@ -15,12 +23,14 @@ function setup() {
 //game control
 let stage = 0; //keeps track of function run
 
-//player2
+//player1
 let p1X = 50;
-let p1Y = 645;
-let pWidth = 20;
-let pHeight = 35;
+let p1Y = 50;
+let p1Width = 20;
+let p1Height = 35;
 let player1;
+
+
 
 //boxes (floors)
 
@@ -57,7 +67,7 @@ function game() {
   push();
   fill(0, 255, 0);
   triangle();
-  rect(p1X, p1Y, pWidth, pHeight);
+  rect(p1X, p1Y, p1Width, p1Height);
   pop();
 
   //window frame
@@ -86,9 +96,9 @@ function game() {
 function checkCollision() {
   for (let rectangle of rectangles) {
     if (
-      p1Y + pHeight > rectangle.y &&
+      p1Y + p1Height > rectangle.y &&
       p1Y < rectangle.y + rectangle.height &&
-      p1X + pWidth > rectangle.x &&
+      p1X + p1Width > rectangle.x &&
       p1X < rectangle.x + rectangle.width
     ) {
       return true;
@@ -105,7 +115,7 @@ function gravity() {
   //...and if the same time, I dont press the up key ...
 
   //gravity
-  if (jump == false && p1Y + pHeight < minHeight && !checkCollision()) {
+  if (jump == false && p1Y + p1Height < minHeight && !checkCollision()) {
     velocity = fallingSpeed; //??
     direction = 1;
   }
