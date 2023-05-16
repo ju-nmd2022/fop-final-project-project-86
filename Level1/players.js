@@ -14,8 +14,29 @@ function setup() {
     new Rectangle(0, -15, 1200, 20),  //top border
     new Rectangle(-15, 0, 20, 700),   //left border
     new Rectangle(1195, 0, 20, 700),   //right border
-
+    new Rectangle(0, 680, 1200, 20), 
   ];
+
+  seeds = [ 
+  new Seed(700, 70, 10, 20),
+  new Seed(500, 200, 10, 20),
+  new Seed(250, 330, 10, 20),
+  new Seed(250, 460, 10, 20),
+  new Seed(700, 460, 10, 20),
+  new Seed(700, 590, 10, 20),
+  ];
+
+  waters = [
+    new Water(600, 70, 15, 15),
+    new Water(200, 200, 15, 15),
+    new Water(550, 330, 15, 15),
+    new Water(200, 460, 15, 15),
+    new Water(600, 460, 15, 15),
+    new Water(600, 590, 15, 15),
+  ];
+
+
+
 }
 
 ///VARIABLES for LEVEL1
@@ -23,9 +44,18 @@ function setup() {
 //game control
 let stage = 0; //keeps track of function run
 
+// Get the reference to the image element
+//const backgroundImage = document.getElementById('backgroundImage');
+
+// Set the opacity of the image
+//backgroundImage.style.opacity = '0.5'; // Adjust the opacity value (between 0 and 1) as desired
+
+let score1 = 0;
+let score2 = 0;
+
 //player1
 let p1X = 50;
-let p1Y = 50;
+let p1Y = 51;
 let p1Width = 20;
 let p1Height = 35;
 let player1;
@@ -38,16 +68,11 @@ let p2Height = 35;
 let player2;
 
 
-
-//boxes (floors)
-
+//boxes (floors), seeds, waters
 let rectangles;
+let seeds;
+let waters;
 
-//1st floor
-//let b1X = 100;
-//let b1Y = 550;
-//let b1Width = 1100;
-//let b1Height = 20;
 
 //gravity
 let jump = false; //it is setted to false first because when the game starts, it does not jump
@@ -61,13 +86,15 @@ let jumpCounter = 0; //keeps track of how much we are jumping
 
 ///LEVEL1
 function game() {
-  background(150, 230, 240);
+  //background(150, 230, 240);
 
   //ground floor
   push();
   fill(255, 255, 255);
   rect(0, 680, 1200, 20);
   pop();
+
+  clear();
 
   //Player1 - seed character
   push();
@@ -83,13 +110,56 @@ function game() {
   rect(p2X, p2Y, p2Width, p2Height);
   pop();
 
-  // //window frame
-  // push();
-  // noFill();
-  // stroke(0, 0, 255);
-  // strokeWeight(10);
-  // rect(0, 0, 1200, 698);
-  // pop();
+  // Check for collisions between Player 1 and seed objects  //reference: chat gpt
+  for (let i = 0; i < seeds.length; i++) {
+    const seed = seeds[i];
+    if (
+      p1X + p1Width > seed.x &&
+      p1X < seed.x + seed.width &&
+      p1Y + p1Height > seed.y &&
+      p1Y < seed.y + seed.height
+    ) {
+      score1++; // Increase the score1
+      seeds.splice(i, 1); // Remove the collected seed from the array
+    }
+  }
+
+  // Check for collisions between Player 2 and water objects  //reference: chat gpt
+  for (let i = 0; i < waters.length; i++) {
+    const water = waters[i];
+    if (
+      p2X + p1Width > water.x &&
+      p2X < water.x + water.width &&
+      p2Y + p1Height > water.y &&
+      p2Y < water.y + water.height
+    ) {
+      score2++; // Increase the score
+      waters.splice(i, 1); // Remove the collected water from the array
+    }
+  }
+
+  // Display the score1
+  push();
+  fill(0,255,0);
+  rect(1105, 5, 85, 45);
+  fill(0);
+  textSize(10);
+  text("PLAYER1", 1110, 20);
+  textSize(20);
+  text("Score: " + score1, 1110, 40); // Adjust the position as needed
+  pop();
+
+  // Display the score2
+  push();
+  fill(0,0,255);
+  rect(5, 5, 85, 45);
+  fill(0);
+  textSize(10);
+  text("PLAYER2", 10, 20);
+  textSize(20);
+  text("Score: " + score2, 10, 40); // Adjust the position as needed
+  pop();
+
 
   //collisions with the floor "boxes"
   /* if //if I'm on the box
@@ -234,10 +304,20 @@ function draw() {
 
   //gravity
   gravity();
+
   // Display the rectangle
   for (let rectangle of rectangles) {
     rectangle.display();
   }
+
+  for (let seed of seeds) {
+    seed.display();
+  }
+
+  for (let water of waters) {
+    water.display();
+  }
+
 }
 
 // Define a custom Rectangle object
@@ -253,4 +333,44 @@ function Rectangle(x, y, width, height) {
   };
 }
 
-// console.log(rectangles);
+// Define a custom Seed object
+function Seed(x, y, width, height) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+
+  this.display = function () {
+    // Draw the seed using p5.js ellipse() function
+    push();
+    noStroke();
+    fill(238, 169, 65);
+    ellipse(this.x, this.y, this.width, this.height);
+    pop();
+  };
+}
+
+// Define a custom Water object
+function Water(x, y, width, height) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+
+  this.display = function () {
+    // Draw the waters
+    push();
+    noStroke();
+    fill(81, 87, 245);
+    ellipse(this.x, this.y, this.width);
+    pop();
+    push();
+    translate(this.x, this.y-3);
+    noStroke();
+    fill(81, 87, 245);
+    triangle(-7, 0, 0, -10, 7, 0);
+    pop();
+  };
+}
+
+
