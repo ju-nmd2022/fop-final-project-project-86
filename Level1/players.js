@@ -53,6 +53,8 @@ let stage = 0; //keeps track of function run
 let score1 = 0;
 let score2 = 0;
 
+let backgroundImage; 
+
 //player1
 let p1X = 50;
 let p1Y = 51;
@@ -98,16 +100,12 @@ function game() {
 
   //Player1 - seed character
   push();
-  fill(0, 255, 0);
-  triangle();
-  rect(p1X, p1Y, p1Width, p1Height);
+  image(player1, p1X, p1Y, p1Width, p1Height);
   pop();
 
-  //Player2 - seed character
+  //Player2 - water character
   push();
-  fill(0, 0, 255);
-  triangle();
-  rect(p2X, p2Y, p2Width, p2Height);
+  image(player2, p2X, p2Y, p2Width, p2Height);
   pop();
 
   // Check for collisions between Player 1 and seed objects  //reference: chat gpt
@@ -248,6 +246,9 @@ function gravity() {
 
 ///PRELOAD
 function preload() {
+  player1 = loadImage('../images/player1.png');
+  player2 = loadImage('../images/player2.png');
+  backgroundImage = loadImage('../images/background2.png'); // Load the background image
   //5:20
 }
 
@@ -255,8 +256,10 @@ function preload() {
 
 function draw() {
   //call functions
+  
   //game stage
   game();
+
 
   //moving player1
   if (keyIsDown(37)) {
@@ -318,6 +321,8 @@ function draw() {
     water.display();
   }
 
+  //background(backgroundImage);
+
 }
 
 // Define a custom Rectangle object
@@ -329,6 +334,7 @@ function Rectangle(x, y, width, height) {
 
   this.display = function () {
     // Draw the rectangle using p5.js rect() function
+    fill(255, 255, 255, 0.5);
     rect(this.x, this.y, this.width, this.height);
   };
 }
