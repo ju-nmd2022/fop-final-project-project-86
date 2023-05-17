@@ -59,6 +59,9 @@ let score1 = 0;
 let score2 = 0;
 
 let backgroundImage; 
+let player1Image;
+let player2Image;
+
 
 //player1
 let p1X = 50;
@@ -67,7 +70,12 @@ let p1Width = 20;
 let p1Height = 35;
 let player1 = {
   jump: false,
-  }
+  direction : 1, //the force of gravity in the Y direction       ??do I need this?
+  velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
+  jumpPower : 15, //how much jump force it has = how high it can jump
+  fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
+  jumpCounter : 0, //keeps track of how much we are jumping
+  };
 
 //player2
 let p2X = 20;
@@ -76,7 +84,12 @@ let p2Width = 20;
 let p2Height = 35;
 let player2 = {
   jump: false,
-  }
+  direction : 1, //the force of gravity in the Y direction       ??do I need this?
+  velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
+  jumpPower : 15, //how much jump force it has = how high it can jump
+  fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
+  jumpCounter : 0, //keeps track of how much we are jumping
+  };
 
 //boxes (floors), seeds, waters
 let rectangles;
@@ -91,13 +104,10 @@ let waters;
 
 //gravity
 //let jump = false; //it is setted to false first because when the game starts, it does not jump
-let direction = 1; //the force of gravity in the Y direction       ??do I need this?
-let velocity = 2; //speed of the player     ??do I need it? it is defined in the function draw - key movements
-let jumpPower = 15; //how much jump force it has = how high it can jump
-let fallingSpeed = 2; //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
+
 let minHeight = 680; //the player cannot fall lower = ground floor
 let maxHeight = 10; //the player cannot jump higher = the top border of the game
-let jumpCounter = 0; //keeps track of how much we are jumping
+
 
 ///LEVEL1
 function game() {
@@ -113,12 +123,12 @@ function game() {
 
   //Player1 - seed character
   push();
-  image(player1, p1X, p1Y, p1Width, p1Height);
+  image(player1Image, p1X, p1Y, p1Width, p1Height);
   pop();
 
   //Player2 - water character
   push();
-  image(player2, p2X, p2Y, p2Width, p2Height);
+  image(player2Image, p2X, p2Y, p2Width, p2Height);
   pop();
 
   
@@ -201,42 +211,60 @@ function checkCollision() {
 ///GRAVITY
 function gravity() {
   //when it touches the ground or not
-  console.log(p1Y, p1X, checkCollision());
+  //console.log(p1Y, p1X, checkCollision());
   //if the player is above the ground, it should keep falling
   //...and if the same time, I dont press the up key ...
-  console.log(p2Y, p2X, checkCollision());
+  //console.log(p2Y, p2X, checkCollision());
 
   
-  //gravity
-  if (jump == false && p1Y + p1Height < minHeight && p2Y + p2Height < minHeight && !checkCollision()) {
-    velocity = fallingSpeed; //??
-    direction = 1;
+  //gravity1
+  if (player1.jump == false && p1Y + p1Height < minHeight  && !checkCollision()) {
+    player1.velocity = player1.fallingSpeed; //??
+    player1.direction = 1;
   }
   //jump
-  else if (jump == true) {
-    velocity = jumpPower; //if jump is true(if I press the up key) -> the velocity will equal to a negative jump power - player will go up
-    direction = -1;
+  else if (player1.jump == true) {
+    player1.velocity = player1.jumpPower; //if jump is true(if I press the up key) -> the velocity will equal to a negative jump power - player will go up
+    player1.direction = -1;
   } else {
-    direction = 0;
-    jumpCounter = 0; //"resets" jump counter when it is not in the jumping stage anymore (=jump == false)
+    player1.direction = 0;
+    player1.jumpCounter = 0; //"resets" jump counter when it is not in the jumping stage anymore (=jump == false)
   }
 
-  p1Y = p1Y + direction * velocity; //it makes it fall - without any modifications, it falls constantly
-  if (checkCollision()) {
-    p1Y = p1Y - direction * velocity; //it makes it fall - without any modifications, it falls constantly
+  //gravity2
+  if (player2.jump == false && p2Y + p2Height < minHeight  && !checkCollision()) {
+    player2.velocity = player2.fallingSpeed; //??
+    player2.direction = 1;
+  }
+  //jump
+  else if (player2.jump == true) {
+    player2.velocity = player2.jumpPower; //if jump is true(if I press the up key) -> the velocity will equal to a negative jump power - player will go up
+    player2.direction = -1;
+  } else {
+    player2.direction = 0;
+    player2.jumpCounter = 0; //"resets" jump counter when it is not in the jumping stage anymore (=jump == false)
   }
 
-  p2Y = p2Y + direction * velocity; //it makes it fall - without any modifications, it falls constantly
+  
+
+  p1Y = p1Y + player1.direction * player1.velocity; //it makes it fall - without any modifications, it falls constantly
   if (checkCollision()) {
-    p2Y = p2Y - direction * velocity; //it makes it fall - without any modifications, it falls constantly
+    p1Y = p1Y - player1.direction * player1.velocity; //it makes it fall - without any modifications, it falls constantly
+  }
+
+  p2Y = p2Y + player2.direction * player2.velocity; //it makes it fall - without any modifications, it falls constantly
+  if (checkCollision()) {
+    p2Y = p2Y - player2.direction * player2.velocity; //it makes it fall - without any modifications, it falls constantly
   }
 
 }
 
+
+
 ///PRELOAD
 function preload() {
-  player1 = loadImage('../images/player1.png');
-  player2 = loadImage('../images/player2.png');
+  player1Image = loadImage('../images/player1.png');
+  player2Image = loadImage('../images/player2.png');
   backgroundImage = loadImage('../images/background2.png'); // Load the background image
   //5:20
 }
@@ -268,10 +296,10 @@ function draw() {
   }
   if (keyIsDown(38)) {
     //if I press the up key, jump will be true -> the player will jump
-    jump = true;
+    player1.jump = true;
   } else {
     //if I dont press the up key, jump will be false-> the player wont jump
-    jump = false;
+    player1.jump = false;
   }
 
   //moving player2
@@ -290,10 +318,10 @@ function draw() {
   }
   if (keyIsDown(87)) {
     //if I press the up key, jump will be true -> the player will jump
-    jump = true;
+    player2.jump = true;
   } else {
     //if I dont press the up key, jump will be false-> the player wont jump
-    jump = false;
+    player2.jump = false;
   }
 
   //gravity
@@ -371,5 +399,10 @@ function Water(x, y, width, height) {
     pop();
   };
 }
+
+function newDoc(){
+  window.location.assign("../Level2/level2.html")
+}
+
 
 
