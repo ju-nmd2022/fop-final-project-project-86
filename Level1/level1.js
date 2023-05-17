@@ -15,10 +15,16 @@ function setup() {
     new Rectangle(-15, 0, 20, 700),   //left border
     new Rectangle(1195, 0, 20, 700),   //right border
     new Rectangle(0, 680, 1200, 20), 
-    new Rectangle(1100, 620, 80, 50), //next
   ];
 
-//next = [new Rectangle(1100, 620, 80, 50)]
+next = new Next(1110, 620, 80, 60);
+
+traps = [
+  new Trap(100, 550, 100, 20),
+  new Trap(0, 420, 100, 20),
+  new Trap(100, 290, 100, 20),
+  new Trap(400, 290, 100, 20),
+];
 
 
   seeds = [ 
@@ -95,11 +101,11 @@ let player2 = {
 let rectangles;
 let seeds;
 let waters;
+let traps;
+let next;
 
-
-
-//"next level" box area
-
+//go to next level
+let bothPlayersTouchedNext = false;
 
 
 //gravity
@@ -113,11 +119,11 @@ let maxHeight = 10; //the player cannot jump higher = the top border of the game
 function game() {
   //background(150, 230, 240);
 
-  //ground floor
-  push();
-  fill(255, 255, 255);
-  rect(0, 680, 1200, 20);
-  pop();
+  // //ground floor
+  // push();
+  // fill(255, 255, 255);
+  // rect(0, 680, 1200, 20);
+  // pop();
 
   //clear();
 
@@ -340,9 +346,31 @@ function draw() {
     water.display();
   }
 
-  
+  for (let trap of traps) {
+    trap.display();
+  }
 
+  next.display();
+
+  // Check if both players have touched the "next" object   //reference: chat gpt
+  if (
+    p1X + p1Width > next.x &&
+    p1X < next.x + next.width &&
+    p1Y + p1Height > next.y &&
+    p1Y < next.y + next.height &&
+    p2X + p2Width > next.x &&
+    p2X < next.x + next.width &&
+    p2Y + p2Height > next.y &&
+    p2Y < next.y + next.height &&
+    (score1 === 6 && score2 === 6)
+  ) {
+    bothPlayersTouchedNext = true;
+  }
   
+  // Load level2.html if both players have touched the "next" object
+  if (bothPlayersTouchedNext) {
+    window.location.href = "../Level2/level2.html";
+  }
 
 }
 
@@ -400,9 +428,54 @@ function Water(x, y, width, height) {
   };
 }
 
-function newDoc(){
-  window.location.assign("../Level2/level2.html")
+// Define a custom Trap object
+function Trap(x, y, width, height) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+
+  this.display = function () {
+    // Draw the trap using p5.js rect() function
+    fill(255, 0, 0);
+    rect(this.x, this.y, this.width, this.height);
+  };
+}
+
+// Define a next object
+function Next(x, y, width, height) {
+  this.x = x;
+  this.y = y;
+  this.width = width;
+  this.height = height;
+
+  this.display = function () {
+    // Draw the next using p5.js rect() function
+    fill(255, 255, 255, 0.5);
+    rect(this.x, this.y, this.width, this.height);
+  };
 }
 
 
 
+
+/* function newDoc(){
+  window.location.assign("../Level2/level2.html")
+} */
+
+
+/* function newDoc() {
+  if (
+    p1Y + p1Height > next.y &&
+    p1Y < next.y + next.height &&
+    p1X + p1Width > next.x &&
+    p1X < next.x + next.width ||
+    p2Y + p2Height > next.y &&
+    p2Y < next.y + next.height &&
+    p2X + p2Width > next.x &&
+    p2X < next.x + next.width
+    ) {
+    window.location.assign("../Level2/level2.html")
+  }
+  
+}  */
