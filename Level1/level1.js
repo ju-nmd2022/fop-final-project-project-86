@@ -15,7 +15,11 @@ function setup() {
     new Rectangle(-15, 0, 20, 700),   //left border
     new Rectangle(1195, 0, 20, 700),   //right border
     new Rectangle(0, 680, 1200, 20), 
+    new Rectangle(1100, 620, 80, 50), //next
   ];
+
+//next = [new Rectangle(1100, 620, 80, 50)]
+
 
   seeds = [ 
   new Seed(700, 70, 10, 20),
@@ -37,6 +41,7 @@ function setup() {
 
 
 
+  
 }
 
 ///VARIABLES for LEVEL1
@@ -60,15 +65,18 @@ let p1X = 50;
 let p1Y = 51;
 let p1Width = 20;
 let p1Height = 35;
-let player1;
+let player1 = {
+  jump: false,
+  }
 
 //player2
 let p2X = 20;
 let p2Y = 50;
 let p2Width = 20;
 let p2Height = 35;
-let player2;
-
+let player2 = {
+  jump: false,
+  }
 
 //boxes (floors), seeds, waters
 let rectangles;
@@ -76,8 +84,13 @@ let seeds;
 let waters;
 
 
+
+//"next level" box area
+
+
+
 //gravity
-let jump = false; //it is setted to false first because when the game starts, it does not jump
+//let jump = false; //it is setted to false first because when the game starts, it does not jump
 let direction = 1; //the force of gravity in the Y direction       ??do I need this?
 let velocity = 2; //speed of the player     ??do I need it? it is defined in the function draw - key movements
 let jumpPower = 15; //how much jump force it has = how high it can jump
@@ -96,7 +109,7 @@ function game() {
   rect(0, 680, 1200, 20);
   pop();
 
-  clear();
+  //clear();
 
   //Player1 - seed character
   push();
@@ -107,6 +120,8 @@ function game() {
   push();
   image(player2, p2X, p2Y, p2Width, p2Height);
   pop();
+
+  
 
   // Check for collisions between Player 1 and seed objects  //reference: chat gpt
   for (let i = 0; i < seeds.length; i++) {
@@ -159,19 +174,10 @@ function game() {
   pop();
 
 
-  //collisions with the floor "boxes"
-  /* if //if I'm on the box
-   //1st
-   (p1X+pWidth >= 100
-   && p1Y+pHeight >= 550
-   && p1Y <= 550+20
-   && jump == false)     //we have to make sure if we are jumping or not
-   {
-   p1Y = p1Y+0;    //dont fall
-   velocity = 0;     //speed because we are not falling     ??
-   jumpCounter = 0;    //allows us to jump again
- }
- */
+  
+
+ 
+ 
 }
 
 function checkCollision() {
@@ -208,23 +214,6 @@ function gravity() {
   }
   //jump
   else if (jump == true) {
-    //if jump is true(if I press the up key)
-    // if (
-    //   p1Y <= maxHeight || //if the player would go above the top border AND...  (Part3 11:00)
-    //   jumpCounter >= jumpPower
-    // ) {
-    //   //OR...??    (Part3 11:00)
-    //   //we need to add the below if statements because we dont want our player to fall down below the ground when we still hold the down key
-    //   if (p1Y >= minHeight) {
-    //     //IF the player reaches the ground...
-    //     p1Y = minHeight; //...THEN we want it to stay there
-    //   } else {
-    //     velocity = fallingSpeed;
-    //   } //ELSE??
-    // } else {
-    //   jumpCounter = jumpCounter + 1; //add to jumpCounter (if its +1 -> I can jump twice at a time (idk why) the numper of jumping opportunities also increase when I ecrease the jumpPower, idk why)       ??  (Part3 14:00)
-    //   direction = -1
-    // }
     velocity = jumpPower; //if jump is true(if I press the up key) -> the velocity will equal to a negative jump power - player will go up
     direction = -1;
   } else {
@@ -257,6 +246,8 @@ function preload() {
 function draw() {
   //call functions
   
+  background(backgroundImage);
+
   //game stage
   game();
 
@@ -321,7 +312,9 @@ function draw() {
     water.display();
   }
 
-  //background(backgroundImage);
+  
+
+  
 
 }
 
