@@ -14,16 +14,16 @@ function setup() {
     new Rectangle(0, -15, 1200, 20),  //top border
     new Rectangle(-15, 0, 20, 700),   //left border
     new Rectangle(1195, 0, 20, 700),   //right border
-    new Rectangle(0, 680, 1200, 20), 
+    new Rectangle(0, 680, 1200, 20),  //bottom border
   ];
 
 next = new Next(1110, 620, 80, 60);
 
 traps = [
-  new Trap(100, 550, 100, 20),
-  new Trap(0, 420, 100, 20),
-  new Trap(100, 290, 100, 20),
-  new Trap(400, 290, 100, 20),
+  new Trap(800, 677, 100, 23),
+  new Trap(300, 677, 100, 23),
+  new Trap(400, 547, 100, 23),
+  new Trap(850, 547, 100, 23),
 ];
 
 
@@ -371,6 +371,33 @@ function draw() {
   if (bothPlayersTouchedNext) {
     window.location.href = "../Level2/level2.html";
   }
+
+  // Check for collisions between Player 1 and trap objects
+  for (let i = 0; i < traps.length; i++) {
+    const trap = traps[i];
+    if (
+      p1X + p1Width > trap.x &&
+      p1X < trap.x + trap.width &&
+      p1Y + p1Height > trap.y &&
+      p1Y < trap.y + trap.height
+    ) {
+      window.location.href = "../Lose/lose.html";
+    }
+  }
+
+  // Check for collisions between Player 2 and trap objects
+  for (let i = 0; i < traps.length; i++) {
+    const trap = traps[i];
+    if (
+      p2X + p2Width > trap.x &&
+      p2X < trap.x + trap.width &&
+      p2Y + p2Height > trap.y &&
+      p2Y < trap.y + trap.height
+    ) {
+      window.location.href = "../Lose/lose.html";
+    }
+  }
+
 
 }
 
