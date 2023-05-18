@@ -1,18 +1,4 @@
-function setup() {
-    createCanvas(1200, 700);
-}
-
-
-/* function preload() {
-    backgroundImage = loadImage('../images/level2-screen.png'); // Load the background image
-  } */
-
-
-function draw() {
-    background(backgroundImage);
- }
-
- //player1
+//player1
 let p1X = 50;
 let p1Y = 200;
 let pWidth = 50;
@@ -122,6 +108,7 @@ function draw(){
 
     //collisions between seed and ground gap
 
+
     for (let i = 0; i < 6; i++) {
       noStroke();
       fill(0, 0, 0);
@@ -139,7 +126,7 @@ function draw(){
       noStroke();
       fill(0, 0, 0);
       ellipse(waterGroundArray[i].x, waterGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, waterGroundArray[i].x, waterGroundArray[i].y) <= 40) {
+      if (dist(waterX, waterY, waterGroundArray[i].x, waterGroundArray[i].y) <= 40 && groundArray[i].hit) {
           waterGroundArray[i].hit = true;
           waterPosition = 3;
       }
@@ -153,8 +140,41 @@ function draw(){
           waterHole(waterGroundArray[i].x, waterGroundArray[i].y);
       }
   }
+}  
 
-}
+  //   for (let i = 0; i < 6; i++) {
+  //     noStroke();
+  //     fill(0, 0, 0);
+  //     ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
+  //     if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
+  //         groundArray[i].hit = true;
+  //         seed1Position = 2;
+  //     }
+  //     if (groundArray[i].hit) {
+  //         hole(groundArray[i].x, groundArray[i].y);
+  //     }
+  // }
+  
+//   for (let i = 0; i < 6; i++) {
+//       noStroke();
+//       fill(0, 0, 0);
+//       ellipse(waterGroundArray[i].x, waterGroundArray[i].y, gHeight, gWidth);
+//       if (dist(waterX, waterY, waterGroundArray[i].x, waterGroundArray[i].y) <= 40) {
+//           waterGroundArray[i].hit = true;
+//           waterPosition = 3;
+//       }
+//   }
+  
+//   for (let i = 0; i < 6; i++) {
+//       if (groundArray[i].hit) {
+//           hole(groundArray[i].x, groundArray[i].y);
+//       }
+//       if (waterGroundArray[i].hit) {
+//           waterHole(waterGroundArray[i].x, waterGroundArray[i].y);
+//       }
+//   }
+
+// }
 
 
 function hole(x, y){
