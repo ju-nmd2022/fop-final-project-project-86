@@ -45,7 +45,8 @@ traps = [
     new Water(600, 590, 15, 15),
   ];
 
-
+  startTime = millis(); // Store the start time
+  // Rest of your setup code...
 
   
 }
@@ -76,7 +77,7 @@ let p1Width = 20;
 let p1Height = 35;
 let player1 = {
   jump: false,
-  direction : 1, //the force of gravity in the Y direction       ??do I need this?
+  direction : 1, //the force of gravity in the Y direction       
   velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
   jumpPower : 15, //how much jump force it has = how high it can jump
   fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
@@ -90,7 +91,7 @@ let p2Width = 20;
 let p2Height = 35;
 let player2 = {
   jump: false,
-  direction : 1, //the force of gravity in the Y direction       ??do I need this?
+  direction : 1, //the force of gravity in the Y direction       
   velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
   jumpPower : 15, //how much jump force it has = how high it can jump
   fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
@@ -113,6 +114,9 @@ let bothPlayersTouchedNext = false;
 
 let minHeight = 680; //the player cannot fall lower = ground floor
 let maxHeight = 10; //the player cannot jump higher = the top border of the game
+
+let startTime; // Variable to store the start time
+let elapsedTime = 0; // Variable to store the elapsed time
 
 
 ///LEVEL1
@@ -224,7 +228,7 @@ function gravity() {
 
   
   //gravity1
-  if (player1.jump == false && p1Y + p1Height < minHeight  && !checkCollision()) {
+  if (player1.jump == false && !checkCollision()) {
     player1.velocity = player1.fallingSpeed; //??
     player1.direction = 1;
   }
@@ -399,6 +403,23 @@ function draw() {
   }
 
 
+  // Calculate the elapsed time
+  elapsedTime = millis() - startTime;
+
+  // Check if 30 seconds have passed
+  if (elapsedTime >= 30000) {
+    window.location.href = "../Lose/lose.html";
+  }
+
+  // Display the timer
+  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  push();
+  fill(0);
+  textSize(20);
+  text("Time: " + remainingTime, 500, 20);
+  pop();
+
+
 }
 
 // Define a custom Rectangle object
@@ -486,23 +507,7 @@ function Next(x, y, width, height) {
 
 
 
-/* function newDoc(){
-  window.location.assign("../Level2/level2.html")
-} */
 
+//References:
 
-/* function newDoc() {
-  if (
-    p1Y + p1Height > next.y &&
-    p1Y < next.y + next.height &&
-    p1X + p1Width > next.x &&
-    p1X < next.x + next.width ||
-    p2Y + p2Height > next.y &&
-    p2Y < next.y + next.height &&
-    p2X + p2Width > next.x &&
-    p2X < next.x + next.width
-    ) {
-    window.location.assign("../Level2/level2.html")
-  }
-  
-}  */
+//timer: chat gpt
