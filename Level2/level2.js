@@ -50,8 +50,9 @@ let holeHeight = 40;
 //hole with water droplets
 let flower2B = 500;
 let flower2C = 125;
-let flower2Width = 40;
-let flower2Height = 40;
+let flowerWidth = 40;
+let flowerHeight = 40;
+
 
 
 
@@ -66,7 +67,7 @@ let groundArray = [{
 ];
 
 let flowerGroundArray = [{
-  x: 450, y: 125, hit: false 
+  x: 410, y: 135, hit: false 
 }, {x: 300, y: 100, hit: false
 }, {x: 280, y: 220, hit: false
 }, {x: 320, y: 355, hit: false
@@ -105,6 +106,7 @@ function draw(){
     //activate the seed function
     seeds();
     water(); 
+   
     
     //collisions between seed and ground gap
 
@@ -192,20 +194,20 @@ ellipse(x, y, 18, 10);
 
 function flower(b, c){
   //draw hole with waterdroplets
-
+  push();
   // noStroke();
   // fill(154, 109, 44);
-  ellipse(b, c, flower2Height, flower2Width);
+  
   // fill(79, 211, 243);
   // ellipse(b, c, 20);
-  push();
+  
   noStroke();
 
   //petals
   fill(252, 235, 61);
-  ellipse(b + 62, c, 15);
-  ellipse(b + 60, c - 10, 15);
-  ellipse(b + 48, c - 14, 15);
+  ellipse(b - 10, c, 15);
+  ellipse(b - 5, c - 10, 15);
+  ellipse(b + 8, c - 14, 15);
   ellipse(b + 40, c - 6, 15);
   ellipse(b + 55, c + 6, 15);
   ellipse(b + 43, c + 5, 15);
@@ -216,8 +218,13 @@ function flower(b, c){
   
   strokeWeight(2);
   stroke(163, 234, 65);
-  line(b + 49, c + 12, b + 50, c + 45);
+  line(b + 9, c - 12, b - 5, c + 5);
+  pop();
   } 
+
+
+
+
 
 
 function seeds(){
