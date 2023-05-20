@@ -76,19 +76,22 @@ let flowerGroundArray = [{
 ];
 
 function setup() {
-    createCanvas(500, 600);
+    createCanvas(1200, 700);
   }  
 
-
+  function preload() {
+    backgroundImage = loadImage('../images/level2-screen.png'); // Load the background image
+  }
 
 
 function draw(){
     //call looping functions
     keyPressedChecked();
     keyTyped();
-      
+    
+    background(backgroundImage);
 
-    background(255, 255, 255);
+    
 
 
     //draw player2
