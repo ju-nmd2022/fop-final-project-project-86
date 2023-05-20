@@ -46,7 +46,7 @@ traps = [
   ];
 
   startTime = millis(); // Store the start time
-  // Rest of your setup code...
+  
 
   
 }
@@ -413,10 +413,13 @@ function draw() {
 
   // Display the timer
   let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  
   push();
+  fill(255,0,0);
+  rect(495, 5, 90, 40);
   fill(0);
   textSize(20);
-  text("Time: " + remainingTime, 500, 20);
+  text("Time: " + remainingTime, 500, 30);
   pop();
 
 

@@ -75,8 +75,14 @@ let flowerGroundArray = [{
 }
 ];
 
+
+let startTime; // Variable to store the start time
+let elapsedTime = 0; // Variable to store the elapsed time
+
+
 function setup() {
     createCanvas(1200, 700);
+    startTime = millis(); // Store the start time
   }  
 
   function preload() {
@@ -142,6 +148,26 @@ function draw(){
         flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
       }
   }
+
+  // Calculate the elapsed time
+  elapsedTime = millis() - startTime;
+
+  // Check if 30 seconds have passed
+  if (elapsedTime >= 30000) {
+    window.location.href = "../Lose/lose.html";
+  }
+
+  // Display the timer
+  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  
+  push();
+  fill(255,0,0);
+  rect(495, 5, 90, 40);
+  fill(0);
+  textSize(20);
+  text("Time: " + remainingTime, 500, 30);
+  pop();
+  
 }  
 
 
