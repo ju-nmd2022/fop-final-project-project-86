@@ -48,10 +48,10 @@ let holeHeight = 40;
 
 
 //hole with water droplets
-let water2B = 500;
-let water2C = 180;
-let water2Width = 40;
-let water2Height = 40;
+let flower2B = 500;
+let flower2C = 125;
+let flower2Width = 40;
+let flower2Height = 40;
 
 
 
@@ -65,8 +65,8 @@ let groundArray = [{
 }
 ];
 
-let waterGroundArray = [{
-  x: 450, y: 180, hit: false 
+let flowerGroundArray = [{
+  x: 450, y: 125, hit: false 
 }, {x: 300, y: 100, hit: false
 }, {x: 280, y: 220, hit: false
 }, {x: 320, y: 355, hit: false
@@ -105,13 +105,12 @@ function draw(){
     //activate the seed function
     seeds();
     water(); 
-
+    
     //collisions between seed and ground gap
-
 
     for (let i = 0; i < 6; i++) {
       noStroke();
-      fill(0, 0, 0);
+      fill(154, 109, 44);
       ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
       if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
           groundArray[i].hit = true;
@@ -124,23 +123,28 @@ function draw(){
   
   for (let i = 0; i < 6; i++) {
       noStroke();
-      fill(0, 0, 0);
-      ellipse(waterGroundArray[i].x, waterGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, waterGroundArray[i].x, waterGroundArray[i].y) <= 40 && groundArray[i].hit) {
-          waterGroundArray[i].hit = true;
+      fill(154, 109, 44);
+      ellipse(flowerGroundArray[i].x, flowerGroundArray[i].y, gHeight, gWidth);
+      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 40 && groundArray[i].hit) {
+        flowerGroundArray[i].hit = true;
           waterPosition = 3;
       }
   }
-  
+  //the following part of the code was aided by Chatgpt
   for (let i = 0; i < 6; i++) {
       if (groundArray[i].hit) {
           hole(groundArray[i].x, groundArray[i].y);
       }
-      if (waterGroundArray[i].hit) {
-          waterHole(waterGroundArray[i].x, waterGroundArray[i].y);
+      if (flowerGroundArray[i].hit) {
+        flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
       }
   }
 }  
+
+
+
+
+
 
   //   for (let i = 0; i < 6; i++) {
   //     noStroke();
@@ -180,19 +184,39 @@ function draw(){
 function hole(x, y){
 //draw hole with seed
 noStroke();
-fill(0, 0, 0);
+fill(154, 109, 44);
 ellipse(x, y, holeHeight, holeWidth);
-fill(128, 36, 66);
+fill(110, 77, 30);
 ellipse(x, y, 18, 10);
 } 
 
-function waterHole(b, c){
+function flower(b, c){
   //draw hole with waterdroplets
+
+  // noStroke();
+  // fill(154, 109, 44);
+  ellipse(b, c, flower2Height, flower2Width);
+  // fill(79, 211, 243);
+  // ellipse(b, c, 20);
+  push();
   noStroke();
+
+  //petals
+  fill(252, 235, 61);
+  ellipse(b + 62, c, 15);
+  ellipse(b + 60, c - 10, 15);
+  ellipse(b + 48, c - 14, 15);
+  ellipse(b + 40, c - 6, 15);
+  ellipse(b + 55, c + 6, 15);
+  ellipse(b + 43, c + 5, 15);
+  //inner flower
   fill(0, 0, 0);
-  ellipse(b, c, water2Height, water2Width);
-  fill(79, 211, 243);
-  ellipse(b, c, 20);
+  ellipse(b + 50, c- 5, 12); 
+  //stem
+  
+  strokeWeight(2);
+  stroke(163, 234, 65);
+  line(b + 49, c + 12, b + 50, c + 45);
   } 
 
 
@@ -205,7 +229,7 @@ function seeds(){
 
 //draw seed   
 noStroke();
-fill(198, 136, 66);
+fill(110, 77, 30);
 ellipse(seed1X, seed1Y, seedWidth, seedHeight);  
 
 //keep track and fire the seeds
@@ -247,9 +271,9 @@ function water(){
       //3 = collision with object, return to p2
       
   
-  //draw seed   
+  //draw water   
   noStroke();
-  fill(79, 211, 243);
+  fill(81, 213, 242);
   ellipse(waterX, waterY, waterWidth, waterHeight);  
   
   //keep track and fire the seeds
@@ -268,7 +292,7 @@ function water(){
   
     }
     else{
-      //when you are not firing, the seed should be with p1
+      //when you are not firing, the droplet should be with p1
       waterY = p2Y;
       waterX = p2X;
       
