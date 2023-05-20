@@ -156,7 +156,7 @@ function draw(){
 
   // Check if 30 seconds have passed
   if (elapsedTime >= 30000) {
-    window.location.href = "../Lose/lose.html";
+    window.location.href = "../LoseLevel2/lose2.html";
   }
 
   // Display the timer
