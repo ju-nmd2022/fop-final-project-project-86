@@ -11,7 +11,7 @@ function setup() {
     new Rectangle(300, 290, 20, 130),
     new Rectangle(600, 290, 20, 130),
     new Rectangle(0, 160, 1100, 20),
-    new Rectangle(0, -15, 1200, 20),  //top border
+    new Rectangle(0, 30, 1200, 20),  //top border
     new Rectangle(-15, 0, 20, 700),   //left border
     new Rectangle(1195, 0, 20, 700),   //right border
     new Rectangle(0, 680, 1200, 20),  //bottom border
