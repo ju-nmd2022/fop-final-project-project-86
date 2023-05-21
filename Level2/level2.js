@@ -155,12 +155,12 @@ function draw(){
   elapsedTime = millis() - startTime;
 
   // Check if 30 seconds have passed
-  if (elapsedTime >= 30000) {
+  if (elapsedTime >= 50000) {
     window.location.href = "../LoseLevel2/lose2.html";
   }
 
   // Display the timer
-  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
   push();
   fill(255,0,0);

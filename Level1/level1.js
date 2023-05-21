@@ -11,29 +11,28 @@ function setup() {
     new Rectangle(300, 290, 20, 130),
     new Rectangle(600, 290, 20, 130),
     new Rectangle(0, 160, 1100, 20),
-    new Rectangle(0, 30, 1200, 20),  //top border
-    new Rectangle(-15, 0, 20, 700),   //left border
-    new Rectangle(1195, 0, 20, 700),   //right border
-    new Rectangle(0, 680, 1200, 20),  //bottom border
+    new Rectangle(0, 30, 1200, 20), //top border
+    new Rectangle(-15, 0, 20, 700), //left border
+    new Rectangle(1195, 0, 20, 700), //right border
+    new Rectangle(0, 680, 1200, 20), //bottom border
   ];
 
-next = new Next(1110, 620, 80, 60);
+  next = new Next(1110, 620, 80, 60);
 
-traps = [
-  new Trap(800, 677, 100, 23),
-  new Trap(300, 677, 100, 23),
-  new Trap(400, 547, 100, 23),
-  new Trap(850, 547, 100, 23),
-];
+  traps = [
+    new Trap(800, 677, 100, 23),
+    new Trap(300, 677, 100, 23),
+    new Trap(400, 547, 100, 23),
+    new Trap(850, 547, 100, 23),
+  ];
 
-
-  seeds = [ 
-  new Seed(700, 70, 10, 20),
-  new Seed(500, 200, 10, 20),
-  new Seed(250, 330, 10, 20),
-  new Seed(250, 460, 10, 20),
-  new Seed(700, 460, 10, 20),
-  new Seed(700, 590, 10, 20),
+  seeds = [
+    new Seed(700, 70, 10, 20),
+    new Seed(500, 200, 10, 20),
+    new Seed(250, 330, 10, 20),
+    new Seed(250, 460, 10, 20),
+    new Seed(700, 460, 10, 20),
+    new Seed(700, 590, 10, 20),
   ];
 
   waters = [
@@ -46,9 +45,6 @@ traps = [
   ];
 
   startTime = millis(); // Store the start time
-  
-
-  
 }
 
 ///VARIABLES for LEVEL1
@@ -65,10 +61,9 @@ let stage = 0; //keeps track of function run
 let score1 = 0;
 let score2 = 0;
 
-let backgroundImage; 
+let backgroundImage;
 let player1Image;
 let player2Image;
-
 
 //player1
 let p1X = 50;
@@ -76,13 +71,14 @@ let p1Y = 51;
 let p1Width = 20;
 let p1Height = 35;
 let player1 = {
-  jump: false,
-  direction : 1, //the force of gravity in the Y direction       
-  velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
-  jumpPower : 15, //how much jump force it has = how high it can jump
-  fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
-  jumpCounter : 0, //keeps track of how much we are jumping
-  };
+  jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
+  ready: false, //am I ready to jump
+  direction: 1, //the force of gravity in the Y direction
+  velocity: 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
+  jumpPower: 15, //how much jump force it has = how high it can jump
+  fallingSpeed: 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
+  jumpCounter: 0, //keeps track of how much we are jumping
+};
 
 //player2
 let p2X = 20;
@@ -91,12 +87,13 @@ let p2Width = 20;
 let p2Height = 35;
 let player2 = {
   jump: false,
-  direction : 1, //the force of gravity in the Y direction       
-  velocity : 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
-  jumpPower : 15, //how much jump force it has = how high it can jump
-  fallingSpeed : 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
-  jumpCounter : 0, //keeps track of how much we are jumping
-  };
+  ready: false, //am I ready to jump
+  direction: 1, //the force of gravity in the Y direction
+  velocity: 2, //speed of the player     ??do I need it? it is defined in the function draw - key movements
+  jumpPower: 15, //how much jump force it has = how high it can jump
+  fallingSpeed: 2, //the speed when it falls, equals to velocity  (Part3 3:33)   ??do I need it? it is defined in the function gravity : p1Y = p1Y + (direction*velocity)+10;
+  jumpCounter: 0, //keeps track of how much we are jumping
+};
 
 //boxes (floors), seeds, waters
 let rectangles;
@@ -108,7 +105,6 @@ let next;
 //go to next level
 let bothPlayersTouchedNext = false;
 
-
 //gravity
 //let jump = false; //it is setted to false first because when the game starts, it does not jump
 
@@ -118,6 +114,8 @@ let maxHeight = 10; //the player cannot jump higher = the top border of the game
 let startTime; // Variable to store the start time
 let elapsedTime = 0; // Variable to store the elapsed time
 
+let upKeyPressedTime1 = 0;
+let upKeyPressedTime2 = 0;
 
 ///LEVEL1
 function game() {
@@ -140,8 +138,6 @@ function game() {
   push();
   image(player2Image, p2X, p2Y, p2Width, p2Height);
   pop();
-
-  
 
   // Check for collisions between Player 1 and seed objects  //reference: chat gpt
   for (let i = 0; i < seeds.length; i++) {
@@ -173,7 +169,7 @@ function game() {
 
   // Display the score1
   push();
-  fill(0,255,0);
+  fill(0, 255, 0);
   rect(1105, 5, 85, 45);
   fill(0);
   textSize(10);
@@ -184,7 +180,7 @@ function game() {
 
   // Display the score2
   push();
-  fill(0,0,255);
+  fill(0, 0, 255);
   rect(5, 5, 85, 45);
   fill(0);
   textSize(10);
@@ -192,25 +188,19 @@ function game() {
   textSize(20);
   text("Score: " + score2, 10, 40); // Adjust the position as needed
   pop();
-
-
-  
-
- 
- 
 }
 
 function checkCollision() {
   for (let rectangle of rectangles) {
     if (
-      p1Y + p1Height > rectangle.y &&
-      p1Y < rectangle.y + rectangle.height &&
-      p1X + p1Width > rectangle.x &&
-      p1X < rectangle.x + rectangle.width ||
-      p2Y + p2Height > rectangle.y &&
-      p2Y < rectangle.y + rectangle.height &&
-      p2X + p2Width > rectangle.x &&
-      p2X < rectangle.x + rectangle.width
+      (p1Y + p1Height > rectangle.y &&
+        p1Y < rectangle.y + rectangle.height &&
+        p1X + p1Width > rectangle.x &&
+        p1X < rectangle.x + rectangle.width) ||
+      (p2Y + p2Height > rectangle.y &&
+        p2Y < rectangle.y + rectangle.height &&
+        p2X + p2Width > rectangle.x &&
+        p2X < rectangle.x + rectangle.width)
     ) {
       return true;
     }
@@ -226,7 +216,25 @@ function gravity() {
   //...and if the same time, I dont press the up key ...
   //console.log(p2Y, p2X, checkCollision());
 
-  
+  // Calculate the elapsed time since the up key was pressed
+  const elapsedTime1 = millis() - upKeyPressedTime1;
+  const elapsedTime2 = millis() - upKeyPressedTime2;
+
+  // Check if the elapsed time exceeds the desired time limit
+  const fallBackTimeLimit = 250; // Adjust the time limit as needed
+  if (elapsedTime1 > fallBackTimeLimit) {
+    player1.jump = false; // Set jump to false to make player1 fall back
+  } else {
+    player1.jump = true;
+  }
+
+  // Check if the elapsed time exceeds the desired time limit
+  if (elapsedTime2 > fallBackTimeLimit) {
+    player2.jump = false; // Set jump to false to make player1 fall back
+  } else {
+    player2.jump = true;
+  }
+
   //gravity1
   if (player1.jump == false && !checkCollision()) {
     player1.velocity = player1.fallingSpeed; //??
@@ -242,7 +250,7 @@ function gravity() {
   }
 
   //gravity2
-  if (player2.jump == false && p2Y + p2Height < minHeight  && !checkCollision()) {
+  if (player2.jump == false && !checkCollision()) {
     player2.velocity = player2.fallingSpeed; //??
     player2.direction = 1;
   }
@@ -255,27 +263,29 @@ function gravity() {
     player2.jumpCounter = 0; //"resets" jump counter when it is not in the jumping stage anymore (=jump == false)
   }
 
-  
-
   p1Y = p1Y + player1.direction * player1.velocity; //it makes it fall - without any modifications, it falls constantly
+  console.log(checkCollision());
   if (checkCollision()) {
     p1Y = p1Y - player1.direction * player1.velocity; //it makes it fall - without any modifications, it falls constantly
+    player1.ready = true; //if it collides with sg, it is ready to jump
+  } else {
+    player1.ready = false; //if it does notv collide= its in th e air, it is not ready to jump
   }
 
   p2Y = p2Y + player2.direction * player2.velocity; //it makes it fall - without any modifications, it falls constantly
   if (checkCollision()) {
     p2Y = p2Y - player2.direction * player2.velocity; //it makes it fall - without any modifications, it falls constantly
+    player2.ready = true; //if it collides with sg, it is ready to jump
+  } else {
+    player2.ready = false; //if it does notv collide= its in th e air, it is not ready to jump
   }
-
 }
-
-
 
 ///PRELOAD
 function preload() {
-  player1Image = loadImage('../images/player1.png');
-  player2Image = loadImage('../images/player2.png');
-  backgroundImage = loadImage('../images/background2.png'); // Load the background image
+  player1Image = loadImage("../images/player1.png");
+  player2Image = loadImage("../images/player2.png");
+  backgroundImage = loadImage("../images/background2.png"); // Load the background image
   //5:20
 }
 
@@ -283,12 +293,11 @@ function preload() {
 
 function draw() {
   //call functions
-  
+
   background(backgroundImage);
 
   //game stage
   game();
-
 
   //moving player1
   if (keyIsDown(37)) {
@@ -306,6 +315,9 @@ function draw() {
   }
   if (keyIsDown(38)) {
     //if I press the up key, jump will be true -> the player will jump
+    if (player1.jump === false && player1.ready) {
+      upKeyPressedTime1 = millis(); //if the above condition, the timer is added to it, it will fall after a certain time
+    }
     player1.jump = true;
   } else {
     //if I dont press the up key, jump will be false-> the player wont jump
@@ -327,6 +339,9 @@ function draw() {
     }
   }
   if (keyIsDown(87)) {
+    if (player2.jump === false && player2.ready) {
+      upKeyPressedTime2 = millis(); //if the above condition, the timer is added to it, it will fall after a certain time
+    }
     //if I press the up key, jump will be true -> the player will jump
     player2.jump = true;
   } else {
@@ -366,11 +381,12 @@ function draw() {
     p2X < next.x + next.width &&
     p2Y + p2Height > next.y &&
     p2Y < next.y + next.height &&
-    (score1 === 6 && score2 === 6)
+    score1 === 6 &&
+    score2 === 6
   ) {
     bothPlayersTouchedNext = true;
   }
-  
+
   // Load level2.html if both players have touched the "next" object
   if (bothPlayersTouchedNext) {
     window.location.href = "../Level2/level2.html";
@@ -402,27 +418,24 @@ function draw() {
     }
   }
 
-
-  // Calculate the elapsed time
+  // Calculate the elapsed time for winning
   elapsedTime = millis() - startTime;
 
   // Check if 30 seconds have passed
-  if (elapsedTime >= 30000) {
+  if (elapsedTime >= 50000) {
     window.location.href = "../Lose/lose.html";
   }
 
   // Display the timer
-  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
-  
+  let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+
   push();
-  fill(255,0,0);
+  fill(255, 0, 0);
   rect(495, 5, 90, 40);
   fill(0);
   textSize(20);
   text("Time: " + remainingTime, 500, 30);
   pop();
-
-
 }
 
 // Define a custom Rectangle object
@@ -471,7 +484,7 @@ function Water(x, y, width, height) {
     ellipse(this.x, this.y, this.width);
     pop();
     push();
-    translate(this.x, this.y-3);
+    translate(this.x, this.y - 3);
     noStroke();
     fill(81, 87, 245);
     triangle(-7, 0, 0, -10, 7, 0);
@@ -506,10 +519,6 @@ function Next(x, y, width, height) {
     rect(this.x, this.y, this.width, this.height);
   };
 }
-
-
-
-
 
 //References:
 
