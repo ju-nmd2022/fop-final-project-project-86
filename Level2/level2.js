@@ -1,23 +1,37 @@
+
+function setup() {
+  createCanvas(1200, 700);
+  startTime = millis(); // Store the start time
+  // imageMode(CENTER);
+}  
+
+//game control
+let stage = 0; //keeps track of function run
+
+let backgroundImage;
+let player1Image;
+let player2Image;
+
 //player1
 let p1X = 50;
 let p1Y = 200;
-let pWidth = 50;
-let pHeight = 50;
+let pWidth = 90;
+let pHeight = 150;
 let pSpeed = 3;
 
 //player
-let p2X = 50;
+let p2X = 50;  
 let p2Y = 300; 
-let p2Width = 50;
-let p2Height = 50;
+let p2Width = 90;
+let p2Height = 150;
 let p2Speed = 3;
 
 //seed
 let seed1X = p1X;
 let seed1Y = p1Y;
 let seed1Position = 0; //keeping track of where the seed is at the moment
-let seedWidth = 18;
-let seedHeight = 10;
+let seedWidth = 50;
+let seedHeight = 80;
 let seedSpeed = 5;
 let fire = false; //am i firing the seed?
 
@@ -29,7 +43,6 @@ let waterWidth = 15;
 let waterHeight = 20;
 let waterSpeed = 5;
 let fire2 = false; //am i firing the seed?
-
 
 
 
@@ -77,52 +90,53 @@ let flowerGroundArray = [{
 ];
 
 
+
+
 let startTime; // Variable to store the start time
 let elapsedTime = 0; // Variable to store the elapsed time
 
 
-function setup() {
-    createCanvas(1200, 700);
-    startTime = millis(); // Store the start time
-  }  
-
-  function preload() {
-    backgroundImage = loadImage('../images/level2-screen.png'); // Load the background image
-  }
 
 
-function draw(){
-    //call looping functions
-    keyPressedChecked();
-    keyTyped();
-    
-    background(backgroundImage);
 
+  //LEVEL 2
+  function game() {
+
+  //player1 - seed character  
+  
      
+  //player2 - water character
 
 
+
+   //draw player1
+   push();
+   noStroke();
+   fill(128, 36, 66);
+  //  ellipse(p1X, p1Y, pWidth, pHeight);
+   image(player1Image, p1X, p1Y, pWidth, pHeight);
+   pop();
+
+  
     //draw player2
+    push();
     noStroke();
-    fill(128, 36, 66);
-    ellipse(p1X, p1Y, pWidth, pHeight);
-
-     //draw player2
-     noStroke();
-     fill(8, 6, 226);
-     ellipse(p2X, p2Y, p2Width, p2Height);
+    fill(8, 6, 226);
+    // ellipse(p2X, p2Y, p2Width, p2Height);
+    image(player2Image, p2X, p2Y, p2Width, p2Height);
+    pop();
 
 
-    //activate the seed function
-    seeds();
-    water(); 
-   
-    
+   //activate the seed function
+   seeds();
+   water(); 
+
     //collisions between seed and ground gap
     for (let i = 0; i < 6; i++) {
       noStroke();
       fill(154, 109, 44);
       ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
-      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
+      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 1200) {
           groundArray[i].hit = true;
           seed1Position = 2;
       }
@@ -135,7 +149,7 @@ function draw(){
       noStroke();
       fill(154, 109, 44);
       ellipse(flowerGroundArray[i].x, flowerGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 40 && groundArray[i].hit) {
+      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 1200 && groundArray[i].hit) {
         flowerGroundArray[i].hit = true;
           waterPosition = 3;
       }
@@ -153,28 +167,41 @@ function draw(){
   // Calculate the elapsed time
   elapsedTime = millis() - startTime;
 
-  // Check if 30 seconds have passed
-  if (elapsedTime >= 30000) {
-    window.location.href = "../Lose/lose.html";
+  // Check if 30 seconds have passed 
+  if (elapsedTime >= 50000) {
+    window.location.href = "../LoseLevel2/lose2.html"; 
   }
 
+  
+  }
+
+
+function draw(){
+
+
+  background(backgroundImage);
+
+  //game stage
+  game();
+
+    //call looping functions
+    keyPressedChecked();
+    keyTyped();
+    
+
+   
   // Display the timer
-  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
   push();
   fill(255,0,0);
-  rect(495, 5, 90, 40);
+  rect(495, 5, 90, 40); 
   fill(0);
   textSize(20);
   text("Time: " + remainingTime, 500, 30);
   pop();
   
 }  
- 
-
-
-
-
 
   //   for (let i = 0; i < 6; i++) {
   //     noStroke();
@@ -252,15 +279,13 @@ function flower(b, c){
 
 
 
-
-
-
 function seeds(){
 //seed positions
     //0 = with player1 ready to be fired
     //1 = in motion after firing
     //2 = collision with object, return to p1
     
+
 
 //draw seed   
 noStroke();
@@ -383,6 +408,12 @@ function keyTyped(){
     }
 }
 
+
+function preload() {
+  backgroundImage = loadImage("../images/level2-screen.png"); // Load the background image
+  player1Image = loadImage("../images/player1Right.png");
+  player2Image = loadImage("../images/player2Right.png");
+}
 
 
 
