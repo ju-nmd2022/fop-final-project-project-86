@@ -48,31 +48,31 @@ let holeHeight = 40;
 
 
 //hole with water droplets
-let flower2B = 500;
-let flower2C = 125;
+let flower2B = 450;
+let flower2C = 180;
 let flowerWidth = 40;
-let flowerHeight = 40;
+let flowerHeight = 40; 
 
 
 
-
+ 
 let groundArray = [{
-    x: 450, y: 180, hit: false 
-}, {x: 300, y: 100, hit: false
-}, {x: 280, y: 220, hit: false
-}, {x: 320, y: 355, hit: false
-}, {x: 340, y: 280, hit: false
-}, {x: 430, y: 30,  hit: false
+    x: 900, y: 320, hit: false 
+}, {x: 1150, y: 380, hit: false
+}, {x: 1020, y: 470, hit: false
+}, {x: 900, y: 670, hit: false
+}, {x: 1030, y: 580, hit: false
+}, {x: 850, y: 540,  hit: false
 }
-];
+]; 
 
 let flowerGroundArray = [{
-  x: 410, y: 135, hit: false 
-}, {x: 300, y: 100, hit: false
-}, {x: 280, y: 220, hit: false
-}, {x: 320, y: 355, hit: false
-}, {x: 340, y: 280, hit: false
-}, {x: 430, y: 30,  hit: false
+  x: 900, y: 320, hit: false 
+}, {x: 1150, y: 380, hit: false
+}, {x: 1020, y: 470, hit: false
+}, {x: 900, y: 670, hit: false
+}, {x: 1030, y: 580, hit: false
+}, {x: 850, y: 540,  hit: false
 }
 ];
 
@@ -98,7 +98,7 @@ function draw(){
     
     background(backgroundImage);
 
-    
+     
 
 
     //draw player2
@@ -118,7 +118,6 @@ function draw(){
    
     
     //collisions between seed and ground gap
-
     for (let i = 0; i < 6; i++) {
       noStroke();
       fill(154, 109, 44);
@@ -171,7 +170,7 @@ function draw(){
   pop();
   
 }  
-
+ 
 
 
 
@@ -224,32 +223,32 @@ ellipse(x, y, 18, 10);
 function flower(b, c){
   //draw hole with waterdroplets
   push();
-  // noStroke();
-  // fill(154, 109, 44);
+  noStroke();
+  fill(99, 68, 14);
   
-  // fill(79, 211, 243);
-  // ellipse(b, c, 20);
+  fill(99, 68, 14);
+  ellipse(b, c, 20);
   
+  push();
   noStroke();
 
   //petals
   fill(252, 235, 61);
-  ellipse(b - 10, c, 15);
-  ellipse(b - 5, c - 10, 15);
-  ellipse(b + 8, c - 14, 15);
+  ellipse(b + 62, c, 15);
+  ellipse(b + 60, c - 10, 15);
+  ellipse(b + 48, c - 14, 15);
   ellipse(b + 40, c - 6, 15);
   ellipse(b + 55, c + 6, 15);
   ellipse(b + 43, c + 5, 15);
   //inner flower
   fill(0, 0, 0);
-  ellipse(b + 50, c- 5, 12); 
+  ellipse(b + 50, c - 5, 12); 
   //stem
   
   strokeWeight(2);
   stroke(163, 234, 65);
-  line(b + 9, c - 12, b - 5, c + 5);
-  pop();
-  } 
+  line(b + 49, c + 12, b + 50, c + 45);
+  }  
 
 
 
