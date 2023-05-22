@@ -1,7 +1,7 @@
 
 function setup() {
-  createCanvas(1200, 700);
-  startTime = millis(); // Store the start time
+  createCanvas(windowWidth, windowHeight);
+  // startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
 
@@ -13,14 +13,14 @@ let player1Image;
 let player2Image;
 
 //player1
-let p1X = 50;
+let p1X = 150;
 let p1Y = 200;
 let pWidth = 120;
 let pHeight = 180;
 let pSpeed = 3;
 
 //player
-let p2X = 50;  
+let p2X = 150;  
 let p2Y = 300; 
 let p2Width = 120;
 let p2Height = 180;
@@ -30,8 +30,8 @@ let p2Speed = 3;
 let seed1X = p1X;
 let seed1Y = p1Y;
 let seed1Position = 0; //keeping track of where the seed is at the moment
-let seedWidth = 50;
-let seedHeight = 80;
+let seedWidth = 20;
+let seedHeight = 10;
 let seedSpeed = 20;
 let fire = false; //am i firing the seed?
 
@@ -67,25 +67,21 @@ let flowerWidth = 40;
 let flowerHeight = 40; 
 
 
-
- 
 let groundArray = [{
-    x: 900, y: 320, hit: false 
-}, {x: 1150, y: 380, hit: false
-}, {x: 1020, y: 470, hit: false
-}, {x: 900, y: 670, hit: false
-}, {x: 1030, y: 580, hit: false
-}, {x: 850, y: 540,  hit: false
+  x: 1028, y: 280, hit: false 
+}, {x: 1270, y: 370, hit: false
+}, {x: 980, y: 470, hit: false
+}, {x: 1345, y: 550, hit: false
+}, {x: 1075, y: 645,  hit: false
 }
 ]; 
 
 let flowerGroundArray = [{
-  x: 900, y: 320, hit: false 
-}, {x: 1150, y: 380, hit: false
-}, {x: 1020, y: 470, hit: false
-}, {x: 900, y: 670, hit: false
-}, {x: 1030, y: 580, hit: false
-}, {x: 850, y: 540,  hit: false
+  x: 1028, y: 280, hit: false // top left
+}, {x: 1270, y: 370, hit: false // second top right  
+}, {x: 980, y: 470, hit: false // third top left
+}, {x: 1345, y: 550, hit: false // first bottom right
+}, {x: 1075, y: 645,  hit: false // bottom left
 }
 ];
 
@@ -96,7 +92,146 @@ let startTime; // Variable to store the start time
 let elapsedTime = 0; // Variable to store the elapsed time
 
 
+function hole(x, y){
+//draw hole with seed
+  push();
+  noStroke();
+  fill(255, 255, 44, 0.9); //transparent
+  ellipse(x, y, holeHeight, holeWidth);
+  fill(78, 54, 13);
+  ellipse(x, y, 18, 10);
+  pop();
+  } 
+  
+  
+  
+function flower(b, c){
+//draw flower in the ground
+  push();
+  translate(-50,-45);
+  
+  noStroke();
+  fill(99, 68, 14);
+    
+  // fill(99, 68, 14);
+  // ellipse(b, c, 20);
+    
+    
+  noStroke();
+  
+//petals
+  fill(252, 235, 61);
+  ellipse(b + 62, c, 15);
+  ellipse(b + 60, c - 10, 15);
+  ellipse(b + 48, c - 14, 15);
+  ellipse(b + 40, c - 6, 15);
+  ellipse(b + 55, c + 6, 15);
+  ellipse(b + 43, c + 5, 15);
+//inner flower
+  fill(0, 0, 0);
+  ellipse(b + 50, c - 5, 12); 
+//stem
+  strokeWeight(2);
+  stroke(163, 234, 65);
+  line(b + 49, c + 12, b + 50, c + 45);
+  pop();
+}  
+  
+  
+  
+function seeds(){
+//seed positions
+  //0 = with player1 ready to be fired
+  //1 = in motion after firing
+  //2 = collision with object, return to p1
+      
+  //draw seed   
+  // noStroke();
+  // fill(110, 77, 30);
+  // ellipse(seed1X, seed1Y, seedWidth, seedHeight);  
+  
+//keep track and fire the seeds
+  if(fire === true && seed1Position === 0){
+      seed1Position = 1;
+  }
+//fire seeds code
+  if(seed1Position === 1){
+      seed1Y = seed1Y; //stops following p1
+      seed1X = seed1X + seedSpeed; //moves horizontally
 
+//draw seed  only when its fired  
+      push();
+      noStroke();
+      fill(78, 54, 13);
+      ellipse(seed1X, seed1Y, seedWidth, seedHeight);  
+      pop();
+  
+    //if it misses
+      if(seed1X >= windowWidth){
+          seed1Position = 2; //reload
+      }
+  
+    }
+    else{
+      //when you are not firing, the seed should be with p1
+      seed1Y = p1Y;
+      seed1X = p1X;
+      
+    }
+  
+  //reload on #2 command
+    if(seed1Position === 2){
+      seed1Y = p1Y;
+      seed1X = p1X;
+      seed1Position = 0;//reset so you can fire again
+    } 
+    
+  }
+  
+  
+function water(){
+    //seed positions
+        //0 = with player1 ready to be fired
+        //1 = in motion after firing
+        //3 = collision with object, return to p2
+  
+        
+    //keep track and fire the seeds
+      if(fire2 === true && waterPosition === 0){
+        waterPosition = 1;
+      }
+    //fire seeds code
+      if(waterPosition === 1){
+        waterY = waterY; //stops following p1
+        waterX = waterX + waterSpeed; //moves horizontally
+      //draw water only when its fired  
+        push();
+        noStroke();
+        fill(81, 213, 242);
+        ellipse(waterX, waterY, waterWidth, waterHeight);
+        pop();  
+        
+        //if it misses
+        if(waterX >= windowWidth){
+          waterPosition = 3; //reload
+        }
+    
+      }
+      else{
+        //when you are not firing, the droplet should be with p1
+        waterY = p2Y;
+        waterX = p2X;
+        
+      }
+    
+    //reload on #2 command
+      if(waterPosition === 3){
+        waterY = p2Y;
+        waterX = p2X;
+        waterPosition = 0;//reset so you can fire again
+      } 
+      
+    }
 
 
   //LEVEL 2
@@ -128,11 +263,11 @@ let elapsedTime = 0; // Variable to store the elapsed time
    water(); 
 
     //collisions between seed and ground gap
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 5; i++) {
       noStroke();
-      fill(154, 109, 44);
+      fill(0, 109, 44, 0.9); //transparency
       ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
-      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
+      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 70) {
           groundArray[i].hit = true;
           seed1Position = 2;
       }
@@ -141,17 +276,17 @@ let elapsedTime = 0; // Variable to store the elapsed time
       }
   }
   
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
       noStroke();
-      fill(154, 109, 44);
+      fill(0, 129, 44, 0.9); //trasnapency 
       ellipse(flowerGroundArray[i].x, flowerGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 40 && groundArray[i].hit) {
+      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 70 && groundArray[i].hit) {
         flowerGroundArray[i].hit = true;
           waterPosition = 3;
       }
   }
   //the following part of the code was aided by Chatgpt
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 5; i++) {
       if (groundArray[i].hit) {
           hole(groundArray[i].x, groundArray[i].y);
       }
@@ -201,135 +336,7 @@ function draw(){
 }  
 
  
-function hole(x, y){
-//draw hole with seed
-noStroke();
-fill(154, 109, 44);
-ellipse(x, y, holeHeight, holeWidth);
-fill(110, 77, 30);
-ellipse(x, y, 18, 10);
-} 
 
-
-
-function flower(b, c){
-  //draw flower in the ground
-  push();
-  noStroke();
-  fill(99, 68, 14);
-  
-  fill(99, 68, 14);
-  ellipse(b, c, 20);
-  
-  push();
-  noStroke();
-
-  //petals
-  fill(252, 235, 61);
-  ellipse(b + 62, c, 15);
-  ellipse(b + 60, c - 10, 15);
-  ellipse(b + 48, c - 14, 15);
-  ellipse(b + 40, c - 6, 15);
-  ellipse(b + 55, c + 6, 15);
-  ellipse(b + 43, c + 5, 15);
-  //inner flower
-  fill(0, 0, 0);
-  ellipse(b + 50, c - 5, 12); 
-  //stem
-  
-  strokeWeight(2);
-  stroke(163, 234, 65);
-  line(b + 49, c + 12, b + 50, c + 45);
-  }  
-
-
-
-function seeds(){
-//seed positions
-    //0 = with player1 ready to be fired
-    //1 = in motion after firing
-    //2 = collision with object, return to p1
-    
-
-
-//draw seed   
-noStroke();
-fill(110, 77, 30);
-ellipse(seed1X, seed1Y, seedWidth, seedHeight);  
-
-//keep track and fire the seeds
-  if(fire === true && seed1Position === 0){
-    seed1Position = 1;
-  }
-//fire seeds code
-  if(seed1Position === 1){
-    seed1Y = seed1Y; //stops following p1
-    seed1X = seed1X + seedSpeed; //moves horizontally
-
-    //if it misses
-    if(seed1X >= 1200){
-        seed1Position = 2; //reload
-    }
-
-  }
-  else{
-    //when you are not firing, the seed should be with p1
-    seed1Y = p1Y;
-    seed1X = p1X;
-    
-  }
-
-//reload on #2 command
-  if(seed1Position === 2){
-    seed1Y = p1Y;
-    seed1X = p1X;
-    seed1Position = 0;//reset so you can fire again
-  } 
-  
-}
-
-
-function water(){
-  //seed positions
-      //0 = with player1 ready to be fired
-      //1 = in motion after firing
-      //3 = collision with object, return to p2
-
-  //draw water   
-  noStroke();
-  fill(81, 213, 242);
-  ellipse(waterX, waterY, waterWidth, waterHeight);  
-  
-  //keep track and fire the seeds
-    if(fire2 === true && waterPosition === 0){
-      waterPosition = 1;
-    }
-  //fire seeds code
-    if(waterPosition === 1){
-      waterY = waterY; //stops following p1
-      waterX = waterX + waterSpeed; //moves horizontally
-  
-      //if it misses
-      if(waterX >= 1200){
-        waterPosition = 3; //reload
-      }
-  
-    }
-    else{
-      //when you are not firing, the droplet should be with p1
-      waterY = p2Y;
-      waterX = p2X;
-      
-    }
-  
-  //reload on #2 command
-    if(waterPosition === 3){
-      waterY = p2Y;
-      waterX = p2X;
-      waterPosition = 0;//reset so you can fire again
-    } 
-    
-  }
 
 
 //make the player1 and player2 move up and down
@@ -374,7 +381,7 @@ function keyTyped(){
 
 
 function preload() {
-  backgroundImage = loadImage("../images/level2-screen.png"); // Load the background image
+  backgroundImage = loadImage("../images/level2 Newbackground.png"); // Load the background image
   player1Image = loadImage("../images/player1Right.png");
   player2Image = loadImage("../images/player2Right.png");
 }

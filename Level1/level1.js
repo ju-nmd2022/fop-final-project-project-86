@@ -71,6 +71,7 @@ let p1Y = 51;
 let p1Width = 20;
 let p1Height = 35;
 let player1 = {
+
   jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
   ready: false, //am I ready to jump
   direction: 1, //the force of gravity in the Y direction
@@ -303,8 +304,17 @@ function draw() {
 
   //moving player1
   if (keyIsDown(37)) {
-    //moving player1 - left
-    p1X = p1X - 4;
+   //moving player1 - left
+   p1X = p1X - 4;
+   //Flip image
+   push();  //Save the current state of transformation
+   translate(p1X + p1Width/2 + 7, p1Y + p1Height/2);  //Translate to the center of the image
+   scale(-1,1);  //Flip the image
+   image(player1Image, -p1Width/2, -p1Height/2, p1Width, p1Height);  //Draw the image centered at the origin
+   pop();  //Restore the state of transformation
+   if (checkCollision()) {
+     p1X = p1X + 4;
+   }
     if (checkCollision()) {
       p1X = p1X + 4;
     }

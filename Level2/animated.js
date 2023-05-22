@@ -65,55 +65,20 @@ function setup() {
   createCanvas(400, 400);
 }
 
-function draw() {
-  background(220);
-
-  // Draw the invisible object
-  noFill();
-  stroke(0, 0, 0);
-  rect(invisibleObjectX, invisibleObjectY, invisibleObjectWidth, invisibleObjectHeight);
-
-  // Draw the main object
-  fill(255, 0, 0); // Red color
-  rect(mainObjectX, mainObjectY, 50, 50);
-
-  // Check for collision between bullet and invisible object
-  if (isBulletActive && checkCollision(bulletX, bulletY, 10, 10, invisibleObjectX, invisibleObjectY, invisibleObjectWidth, invisibleObjectHeight)) {
-    // Bullet hit the invisible object
-    invisibleObjectX = -100; // Move the invisible object off-screen
-    isBulletActive = false; // Disable the bullet
-  }
-
-  // Move and draw the bullet if it is active
-  if (isBulletActive) {
-    bulletY -= bulletSpeed;
-    fill(0, 0, 255); // Blue color
-    ellipse(bulletX, bulletY, 10, 10);
-  }
-
-  // Update the position of the main object
-  mainObjectX = mouseX;
-  mainObjectY = mouseY;
+let groundArray = [{
+    x: 1015, y: 300, hit: false 
+}, {x: 1255, y: 373, hit: false
+}, {x: 965, y: 475, hit: false
+}, {x: 1330, y: 560, hit: false
+}, {x: 1061, y: 640,  hit: false
 }
+]; 
 
-function mousePressed() {
-  // Shoot a bullet from the main object
-  if (!isBulletActive) {
-    bulletX = mainObjectX;
-    bulletY = mainObjectY;
-    isBulletActive = true;
-  }
+let flowerGroundArray = [{
+  x: 1015, y: 300, hit: false // top left
+}, {x: 1255, y: 373, hit: false // second top right  
+}, {x: 965, y: 475, hit: false // third top left
+}, {x: 1330, y: 560, hit: false // first bottom right
+}, {x: 1061, y: 640,  hit: false // bottom left
 }
-
-function checkCollision(x1, y1, w1, h1, x2, y2, w2, h2) {
-  // Check if two rectangles overlap
-  if (
-    x1 + w1 >= x2 &&
-    x1 <= x2 + w2 &&
-    y1 + h1 >= y2 &&
-    y1 <= y2 + h2
-  ) {
-    return true;
-  }
-  return false;
-}
+];
