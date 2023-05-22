@@ -430,7 +430,7 @@ function draw() {
 
   // Display the timer
 
-  let remainingTime = 3000 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  
   
 
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
