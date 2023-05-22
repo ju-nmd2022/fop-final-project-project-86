@@ -215,10 +215,7 @@ function gravity() {
   //if the player is above the ground, it should keep falling
   //...and if the same time, I dont press the up key ...
   //console.log(p2Y, p2X, checkCollision());
-<<<<<<< HEAD
- 
-  
-=======
+
 
   // Calculate the elapsed time since the up key was pressed
   const elapsedTime1 = millis() - upKeyPressedTime1;
@@ -239,7 +236,7 @@ function gravity() {
     player2.jump = true;
   }
 
->>>>>>> 18fe84701913a2199a4401a3ad2c37e8057dc11a
+
   //gravity1
   if (player1.jump == false && !checkCollision()) {
     player1.velocity = player1.fallingSpeed; //??
@@ -432,13 +429,13 @@ function draw() {
   }
 
   // Display the timer
-<<<<<<< HEAD
+
   let remainingTime = 3000 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
-=======
+
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
 
->>>>>>> 18fe84701913a2199a4401a3ad2c37e8057dc11a
+
   push();
   fill(255, 0, 0);
   rect(495, 5, 90, 40);

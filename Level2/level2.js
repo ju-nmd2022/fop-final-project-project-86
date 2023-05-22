@@ -15,15 +15,15 @@ let player2Image;
 //player1
 let p1X = 50;
 let p1Y = 200;
-let pWidth = 90;
-let pHeight = 150;
+let pWidth = 120;
+let pHeight = 180;
 let pSpeed = 3;
 
 //player
 let p2X = 50;  
 let p2Y = 300; 
-let p2Width = 90;
-let p2Height = 150;
+let p2Width = 120;
+let p2Height = 180;
 let p2Speed = 3;
 
 //seed
@@ -32,7 +32,7 @@ let seed1Y = p1Y;
 let seed1Position = 0; //keeping track of where the seed is at the moment
 let seedWidth = 50;
 let seedHeight = 80;
-let seedSpeed = 5;
+let seedSpeed = 20;
 let fire = false; //am i firing the seed?
 
 //water droplets
@@ -41,7 +41,7 @@ let waterY = p2Y;
 let waterPosition = 0; //keeping track of where the seed is at the moment
 let waterWidth = 15;
 let waterHeight = 20;
-let waterSpeed = 5;
+let waterSpeed = 20;
 let fire2 = false; //am i firing the seed?
 
 
@@ -61,7 +61,7 @@ let holeHeight = 40;
 
 
 //hole with water droplets
-let flower2B = 450;
+let flower2B = 500;
 let flower2C = 180;
 let flowerWidth = 40;
 let flowerHeight = 40; 
@@ -102,12 +102,8 @@ let elapsedTime = 0; // Variable to store the elapsed time
   //LEVEL 2
   function game() {
 
-  //player1 - seed character  
-  
-     
+  //player1 - seed character    
   //player2 - water character
-
-
 
    //draw player1
    push();
@@ -127,7 +123,7 @@ let elapsedTime = 0; // Variable to store the elapsed time
     pop();
 
 
-   //activate the seed function
+   //activate the seed and water function
    seeds();
    water(); 
 
@@ -136,7 +132,7 @@ let elapsedTime = 0; // Variable to store the elapsed time
       noStroke();
       fill(154, 109, 44);
       ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
-      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 1200) {
+      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
           groundArray[i].hit = true;
           seed1Position = 2;
       }
@@ -149,7 +145,7 @@ let elapsedTime = 0; // Variable to store the elapsed time
       noStroke();
       fill(154, 109, 44);
       ellipse(flowerGroundArray[i].x, flowerGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 1200 && groundArray[i].hit) {
+      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 40 && groundArray[i].hit) {
         flowerGroundArray[i].hit = true;
           waterPosition = 3;
       }
@@ -161,6 +157,7 @@ let elapsedTime = 0; // Variable to store the elapsed time
       }
       if (flowerGroundArray[i].hit) {
         flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
+       
       }
   }
 
@@ -203,41 +200,7 @@ function draw(){
   
 }  
 
-  //   for (let i = 0; i < 6; i++) {
-  //     noStroke();
-  //     fill(0, 0, 0);
-  //     ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
-  //     if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
-  //         groundArray[i].hit = true;
-  //         seed1Position = 2;
-  //     }
-  //     if (groundArray[i].hit) {
-  //         hole(groundArray[i].x, groundArray[i].y);
-  //     }
-  // }
-  
-//   for (let i = 0; i < 6; i++) {
-//       noStroke();
-//       fill(0, 0, 0);
-//       ellipse(waterGroundArray[i].x, waterGroundArray[i].y, gHeight, gWidth);
-//       if (dist(waterX, waterY, waterGroundArray[i].x, waterGroundArray[i].y) <= 40) {
-//           waterGroundArray[i].hit = true;
-//           waterPosition = 3;
-//       }
-//   }
-  
-//   for (let i = 0; i < 6; i++) {
-//       if (groundArray[i].hit) {
-//           hole(groundArray[i].x, groundArray[i].y);
-//       }
-//       if (waterGroundArray[i].hit) {
-//           waterHole(waterGroundArray[i].x, waterGroundArray[i].y);
-//       }
-//   }
-
-// }
-
-
+ 
 function hole(x, y){
 //draw hole with seed
 noStroke();
@@ -247,8 +210,10 @@ fill(110, 77, 30);
 ellipse(x, y, 18, 10);
 } 
 
+
+
 function flower(b, c){
-  //draw hole with waterdroplets
+  //draw flower in the ground
   push();
   noStroke();
   fill(99, 68, 14);
@@ -302,7 +267,7 @@ ellipse(seed1X, seed1Y, seedWidth, seedHeight);
     seed1X = seed1X + seedSpeed; //moves horizontally
 
     //if it misses
-    if(seed1X >= 500){
+    if(seed1X >= 1200){
         seed1Position = 2; //reload
     }
 
@@ -329,8 +294,7 @@ function water(){
       //0 = with player1 ready to be fired
       //1 = in motion after firing
       //3 = collision with object, return to p2
-      
-  
+
   //draw water   
   noStroke();
   fill(81, 213, 242);
@@ -346,7 +310,7 @@ function water(){
       waterX = waterX + waterSpeed; //moves horizontally
   
       //if it misses
-      if(waterX >= 500){
+      if(waterX >= 1200){
         waterPosition = 3; //reload
       }
   
