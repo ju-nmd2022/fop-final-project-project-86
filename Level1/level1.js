@@ -484,7 +484,7 @@ function Seed(x, y, width, height) {
     ellipse(this.x, this.y, this.width, this.height);
     pop();
   };
-}
+} 
 
 // Define a custom Water object
 function Water(x, y, width, height) {
