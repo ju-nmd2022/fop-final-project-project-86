@@ -9,7 +9,7 @@ button.mousePressed(goToLevel1);
 
 
 function preload() {
-  backgroundImage = loadImage('../images/start-screen.png'); // Load the background image
+  backgroundImage = loadImage('./images/start-screen.png'); // Load the background image
 }
 
 

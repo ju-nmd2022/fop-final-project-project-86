@@ -307,11 +307,11 @@ function draw() {
    //moving player1 - left
    p1X = p1X - 4;
    //Flip image
-   push();  //Save the current state of transformation
-   translate(p1X + p1Width/2 + 7, p1Y + p1Height/2);  //Translate to the center of the image
-   scale(-1,1);  //Flip the image
-   image(player1Image, -p1Width/2, -p1Height/2, p1Width, p1Height);  //Draw the image centered at the origin
-   pop();  //Restore the state of transformation
+   //push();  //Save the current state of transformation
+   //translate(p1X + p1Width/2 + 7, p1Y + p1Height/2);  //Translate to the center of the image
+   //scale(-1,1);  //Flip the image
+   //image(player1Image, -p1Width/2, -p1Height/2, p1Width, p1Height);  //Draw the image centered at the origin
+   //pop();  //Restore the state of transformation
    if (checkCollision()) {
      p1X = p1X + 4;
    }
@@ -465,6 +465,7 @@ function Rectangle(x, y, width, height) {
   this.display = function () {
     // Draw the rectangle using p5.js rect() function
     fill(255, 255, 255, 0.5);
+    //noStroke();
     rect(this.x, this.y, this.width, this.height);
   };
 }
@@ -518,7 +519,7 @@ function Trap(x, y, width, height) {
 
   this.display = function () {
     // Draw the trap using p5.js rect() function
-    fill(255, 0, 0);
+    fill(255, 0, 0, 0.5);
     rect(this.x, this.y, this.width, this.height);
   };
 }
