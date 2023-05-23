@@ -1,6 +1,6 @@
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(1200, 700);
   // startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
@@ -68,20 +68,20 @@ let flowerHeight = 40;
 
 
 let groundArray = [{
-  x: 1028, y: 280, hit: false 
-}, {x: 1270, y: 370, hit: false
-}, {x: 980, y: 470, hit: false
-}, {x: 1345, y: 550, hit: false
-}, {x: 1075, y: 645,  hit: false
+  x: 855, y: 250, hit: false 
+}, {x: 815, y: 420, hit: false
+}, {x: 1060, y: 320, hit: false
+}, {x: 1125, y: 490, hit: false
+}, {x: 890, y: 570,  hit: false
 }
 ]; 
 
 let flowerGroundArray = [{
-  x: 1028, y: 280, hit: false // top left
-}, {x: 1270, y: 370, hit: false // second top right  
-}, {x: 980, y: 470, hit: false // third top left
-}, {x: 1345, y: 550, hit: false // first bottom right
-}, {x: 1075, y: 645,  hit: false // bottom left
+  x: 855, y: 250, hit: false // top left
+}, {x: 815, y: 420, hit: false // second top right  
+}, {x: 1060, y: 320, hit: false // third top left
+}, {x: 1125, y: 490, hit: false // first bottom right
+}, {x: 890, y: 570,  hit: false // bottom left
 }
 ];
 
@@ -105,7 +105,7 @@ function hole(x, y){
   
   
   
-function flower(b, c){
+function flower(x, y){
 //draw flower in the ground
   push();
   translate(-50,-45);
@@ -121,19 +121,19 @@ function flower(b, c){
   
 //petals
   fill(252, 235, 61);
-  ellipse(b + 62, c, 15);
-  ellipse(b + 60, c - 10, 15);
-  ellipse(b + 48, c - 14, 15);
-  ellipse(b + 40, c - 6, 15);
-  ellipse(b + 55, c + 6, 15);
-  ellipse(b + 43, c + 5, 15);
+  ellipse(x + 62, y, 15);
+  ellipse(x + 60, y- 10, 15);
+  ellipse(x + 48, y - 14, 15);
+  ellipse(x + 40, y - 6, 15);
+  ellipse(x + 55, y + 6, 15);
+  ellipse(x + 43, y + 5, 15);
 //inner flower
   fill(0, 0, 0);
-  ellipse(b + 50, c - 5, 12); 
+  ellipse(x + 50, y - 5, 12); 
 //stem
   strokeWeight(2);
   stroke(163, 234, 65);
-  line(b + 49, c + 12, b + 50, c + 45);
+  line(x + 49, y + 12, x + 50, y+ 45);
   pop();
 }  
   
