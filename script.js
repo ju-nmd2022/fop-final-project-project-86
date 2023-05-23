@@ -3,13 +3,13 @@ function setup() {
 
   // Create the button
 button = createButton("Click here to play");
-button.position(800, 600);
+button.position(500, 500);
 button.mousePressed(goToLevel1);
 }
 
 
 function preload() {
-  backgroundImage = loadImage('../images/welcomingScreen.png'); // Load the background image
+  backgroundImage = loadImage('./images/start-screen.png'); // Load the background image
 }
 
 
