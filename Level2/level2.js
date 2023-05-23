@@ -1,7 +1,7 @@
 
 function setup() {
   createCanvas(1200, 700);
-  // startTime = millis(); // Store the start time
+  startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
 
@@ -292,9 +292,15 @@ function water(){
       }
       if (flowerGroundArray[i].hit) {
         flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
-       
+        
       }
+    if (groundArray[i] = flowerGroundArray[i]) {
+      window.location.href = "../images/winningScreen.png";
+    } 
   }
+ //end code
+ 
+ 
 
   // Calculate the elapsed time
   elapsedTime = millis() - startTime;
@@ -323,15 +329,32 @@ function draw(){
 
    
   // Display the timer
-  let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
-  push();
-  fill(255,0,0);
-  rect(495, 5, 90, 40); 
-  fill(0);
-  textSize(20);
-  text("Time: " + remainingTime, 500, 30);
+//set timer to white color then chage to red when 10 seconds are
+
+// the following code was helped by chatGpt
+push();
+  if (remainingTime <= 10) {
+    fill(255, 0, 0); // Set the color to red
+  } else {
+    fill(158, 115, 41); // Set the color to light brown
+  }
+  ellipse(550, 45, 180, 60);
+  fill(255, 255, 255);
+  textSize(25);
+  text("Time: " + remainingTime, 500, 50);
   pop();
+
+
+
+  // push();
+  // fill(158, 115, 41);
+  // ellipse(550, 35, 180, 60); 
+  // fill(255, 255, 255);
+  // textSize(25);
+  // text("Time: " + remainingTime, 500, 40);
+  // pop();
   
 }  
 
