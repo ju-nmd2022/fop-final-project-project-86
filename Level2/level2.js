@@ -294,9 +294,6 @@ function water(){
         flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
         
       }
-    if (groundArray[i] = flowerGroundArray[i]) {
-      window.location.href = "../images/winningScreen.png";
-    } 
   }
  //end code
  
