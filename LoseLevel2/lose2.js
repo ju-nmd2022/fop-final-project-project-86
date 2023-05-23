@@ -2,9 +2,12 @@ function setup() {
     createCanvas(1200, 700);
 
     // Create the button
-  button = createButton("Click here to try again");
-  button.position(500, 500);
-  button.mousePressed(goToLevel1);
+    button = createButton("");
+    button.position(865, 540);
+    button.size(280, 95); 
+    button.mousePressed(goToLevel1);
+    button.style("background-color", "transparent");
+    button.style("border", "none");
 }
 
 

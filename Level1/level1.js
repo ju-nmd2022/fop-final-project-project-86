@@ -3,14 +3,14 @@ function setup() {
 
   // Instantiate the rectangle object
   rectangles = [
-    new Rectangle(100, 550, 1100, 20),
-    new Rectangle(0, 420, 1100, 20),
-    new Rectangle(100, 290, 200, 20),
-    new Rectangle(400, 290, 200, 20),
+    new Rectangle(175, 550, 1100, 20),
+    new Rectangle(0, 420, 1070, 20),
+    new Rectangle(110, 290, 200, 20),
+    new Rectangle(420, 290, 200, 20),
     new Rectangle(700, 290, 500, 20),
-    new Rectangle(300, 290, 20, 130),
-    new Rectangle(600, 290, 20, 130),
-    new Rectangle(0, 160, 1100, 20),
+    new Rectangle(310, 290, 20, 130),
+    new Rectangle(605, 290, 20, 130),
+    new Rectangle(0, 160, 1090, 20),
     new Rectangle(0, 30, 1200, 20), //top border
     new Rectangle(-15, 0, 20, 700), //left border
     new Rectangle(1195, 0, 20, 700), //right border
@@ -23,14 +23,14 @@ function setup() {
     new Trap(800, 677, 100, 23),
     new Trap(300, 677, 100, 23),
     new Trap(400, 547, 100, 23),
-    new Trap(850, 547, 100, 23),
+    new Trap(842, 547, 100, 23),
   ];
 
   seeds = [
     new Seed(700, 70, 10, 20),
     new Seed(500, 200, 10, 20),
     new Seed(250, 330, 10, 20),
-    new Seed(250, 460, 10, 20),
+    //new Seed(250, 460, 10, 20),
     new Seed(700, 460, 10, 20),
     new Seed(700, 590, 10, 20),
   ];
@@ -39,7 +39,7 @@ function setup() {
     new Water(600, 70, 15, 15),
     new Water(200, 200, 15, 15),
     new Water(550, 330, 15, 15),
-    new Water(200, 460, 15, 15),
+    //new Water(200, 460, 15, 15),
     new Water(600, 460, 15, 15),
     new Water(600, 590, 15, 15),
   ];
@@ -170,11 +170,11 @@ function game() {
 
   // Display the score1
   push();
-  fill(0, 255, 0);
-  rect(1105, 5, 85, 45);
-  fill(0);
+  fill(150, 75, 0);
+  rect(1090, 5, 105, 45);
+  fill(255);
   textSize(10);
-  text("PLAYER1", 1110, 20);
+  text("PLAYER1", 1120, 20);
   textSize(20);
   text("Score: " + score1, 1110, 40); // Adjust the position as needed
   pop();
@@ -182,12 +182,12 @@ function game() {
   // Display the score2
   push();
   fill(0, 0, 255);
-  rect(5, 5, 85, 45);
-  fill(0);
+  rect(5, 5, 105, 45);
+  fill(255);
   textSize(10);
-  text("PLAYER2", 10, 20);
+  text("PLAYER2", 30, 20);
   textSize(20);
-  text("Score: " + score2, 10, 40); // Adjust the position as needed
+  text("Score: " + score2, 20, 40); // Adjust the position as needed
   pop();
 }
 
@@ -307,11 +307,11 @@ function draw() {
    //moving player1 - left
    p1X = p1X - 4;
    //Flip image
-   //push();  //Save the current state of transformation
-   //translate(p1X + p1Width/2 + 7, p1Y + p1Height/2);  //Translate to the center of the image
-   //scale(-1,1);  //Flip the image
-   //image(player1Image, -p1Width/2, -p1Height/2, p1Width, p1Height);  //Draw the image centered at the origin
-   //pop();  //Restore the state of transformation
+   push();  //Save the current state of transformation
+   translate(p1X + p1Width/2 + 7, p1Y + p1Height/2);  //Translate to the center of the image
+   scale(-1,1);  //Flip the image
+   image(player1Image, -p1Width/2, -p1Height/2, p1Width, p1Height);  //Draw the image centered at the origin
+   pop();  //Restore the state of transformation
    if (checkCollision()) {
      p1X = p1X + 4;
    }
@@ -401,7 +401,7 @@ function draw() {
 
   // Load level2.html if both players have touched the "next" object
   if (bothPlayersTouchedNext) {
-    window.location.href = "../Level2/level2.html";
+    window.location.href = "../PreLevel2/prelevel2.html";
   }
 
   // Check for collisions between Player 1 and trap objects
@@ -445,13 +445,12 @@ function draw() {
 
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
 
-
   push();
-  fill(255, 0, 0);
-  rect(495, 5, 90, 40);
-  fill(0);
-  textSize(20);
-  text("Time: " + remainingTime, 500, 30);
+  fill(158, 115, 41);
+  ellipse(550, 25, 180, 48);
+  fill(255, 255, 255);
+  textSize(25);
+  text("Time: " + remainingTime, 500, 35);
   pop();
 }
 
@@ -481,7 +480,7 @@ function Seed(x, y, width, height) {
     // Draw the seed using p5.js ellipse() function
     push();
     noStroke();
-    fill(238, 169, 65);
+    fill(150, 75, 0);
     ellipse(this.x, this.y, this.width, this.height);
     pop();
   };
@@ -498,13 +497,13 @@ function Water(x, y, width, height) {
     // Draw the waters
     push();
     noStroke();
-    fill(81, 87, 245);
+    fill(0, 0, 255);
     ellipse(this.x, this.y, this.width);
     pop();
     push();
     translate(this.x, this.y - 3);
     noStroke();
-    fill(81, 87, 245);
+    fill(0, 0, 255);
     triangle(-7, 0, 0, -10, 7, 0);
     pop();
   };
