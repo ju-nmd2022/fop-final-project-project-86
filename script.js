@@ -21,3 +21,4 @@ function draw() {
 function goToLevel1() {
   window.location.href = "../Level1/level1.html"; // Redirect to level1.html
 }
+
