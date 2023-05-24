@@ -7,6 +7,10 @@ function setup() {
 
 //game control
 let stage = 0; //keeps track of function run
+let score = 0;
+let seedHit = false;
+let waterHit = false;
+
 
 let backgroundImage;
 let player1Image;
@@ -262,14 +266,26 @@ function water(){
    seeds();
    water(); 
 
+
+  // score board
+  fill(150, 75, 0);
+  rect(5, 5, 105, 45);
+  fill(255);
+  fill(0);
+  textSize(20);
+  text("Score:",20, 35);
+  text(score, 90, 35); //printing the value of the value even when increased 
+
+
     //collisions between seed and ground gap
     for (let i = 0; i < 5; i++) {
       noStroke();
       fill(0, 109, 44, 0.9); //transparency
       ellipse(groundArray[i].x, groundArray[i].y, gHeight, gWidth);
-      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 70) {
+      if (dist(seed1X, seed1Y, groundArray[i].x, groundArray[i].y) <= 40) {
           groundArray[i].hit = true;
           seed1Position = 2;
+          seedHit = true;
       }
       if (groundArray[i].hit) {
           hole(groundArray[i].x, groundArray[i].y);
@@ -280,35 +296,47 @@ function water(){
       noStroke();
       fill(0, 129, 44, 0.9); //trasnapency 
       ellipse(flowerGroundArray[i].x, flowerGroundArray[i].y, gHeight, gWidth);
-      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 70 && groundArray[i].hit) {
+      if (dist(waterX, waterY, flowerGroundArray[i].x, flowerGroundArray[i].y) <= 40 && groundArray[i].hit) {
         flowerGroundArray[i].hit = true;
           waterPosition = 3;
+          waterHit = true;
       }
   }
   //the following part of the code was aided by Chatgpt
   for (let i = 0; i < 5; i++) {
       if (groundArray[i].hit) {
           hole(groundArray[i].x, groundArray[i].y);
+          
       }
+      
       if (flowerGroundArray[i].hit) {
         flower(flowerGroundArray[i].x, flowerGroundArray[i].y);
         
       }
+
+      if (seedHit && waterHit) {
+        score = score + 1;
+        seedHit = false;
+        waterHit = false;
+        if(score >=5){
+          window.location.href = "../images/WinningScreen.png"; 
+        }
+
+      } 
   }
  //end code
  
- 
 
-  // Calculate the elapsed time
+//Calculate the elapsed time
   elapsedTime = millis() - startTime;
 
-  // Check if 30 seconds have passed 
+//Check if 30 seconds have passed 
   if (elapsedTime >= 50000) {
     window.location.href = "../LoseLevel2/lose2.html"; 
   }
 
   
-  }
+}
 
 
 function draw(){
@@ -328,9 +356,9 @@ function draw(){
   // Display the timer
   let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
-//set timer to white color then chage to red when 10 seconds are
+ //set timer to white color then chage to red when 10 seconds are
 
-// the following code was helped by chatGpt
+ //the following code was helped by chatGpt
 push();
   if (remainingTime <= 10) {
     fill(255, 0, 0); // Set the color to red
@@ -341,18 +369,7 @@ push();
   fill(255, 255, 255);
   textSize(25);
   text("Time: " + remainingTime, 500, 50);
-  pop();
-
-
-
-  // push();
-  // fill(158, 115, 41);
-  // ellipse(550, 35, 180, 60); 
-  // fill(255, 255, 255);
-  // textSize(25);
-  // text("Time: " + remainingTime, 500, 40);
-  // pop();
-  
+  pop();  
 }  
 
  
