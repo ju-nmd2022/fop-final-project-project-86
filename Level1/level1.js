@@ -20,7 +20,7 @@ function setup() {
   next = new Next(1110, 620, 80, 60);
 
   traps = [
-    new Trap(800, 677, 100, 23),
+    new Trap(810, 677, 100, 23),
     new Trap(300, 677, 100, 23),
     new Trap(400, 547, 100, 23),
     new Trap(842, 547, 100, 23),
@@ -393,8 +393,8 @@ function draw() {
     p2X < next.x + next.width &&
     p2Y + p2Height > next.y &&
     p2Y < next.y + next.height &&
-    score1 === 6 &&
-    score2 === 6
+    score1 === 5 &&
+    score2 === 5
   ) {
     bothPlayersTouchedNext = true;
   }
