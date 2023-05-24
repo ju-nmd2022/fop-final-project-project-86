@@ -319,7 +319,7 @@ function water(){
         score = score + 1;
         seedHit = false;
         waterHit = false;
-        if(score >=5){
+        if(score >= 5){
           window.location.href = "../images/WinningScreen.png"; 
         }
 
