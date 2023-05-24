@@ -1,9 +1,10 @@
 
 function setup() {
   createCanvas(1200, 700);
-  startTime = millis(); // Store the start time
+  // startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
+
 
 //game control
 let stage = 0; //keeps track of function run
@@ -331,7 +332,7 @@ function water(){
   elapsedTime = millis() - startTime;
 
 //Check if 30 seconds have passed 
-  if (elapsedTime >= 50000) {
+  if (elapsedTime >= 5000) {
     window.location.href = "../LoseLevel2/lose2.html"; 
   }
 
