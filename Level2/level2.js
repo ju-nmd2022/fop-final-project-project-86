@@ -1,7 +1,7 @@
 
 function setup() {
   createCanvas(1200, 700);
-  // startTime = millis(); // Store the start time
+  startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
 
@@ -71,6 +71,9 @@ let flower2C = 180;
 let flowerWidth = 40;
 let flowerHeight = 40; 
 
+let startTime; // Variable to store the start time
+let elapsedTime = 0; // Variable to store the elapsed time
+
 
 let groundArray = [{
   x: 855, y: 250, hit: false 
@@ -89,12 +92,6 @@ let flowerGroundArray = [{
 }, {x: 890, y: 570,  hit: false // bottom left
 }
 ];
-
-
-
-
-let startTime; // Variable to store the start time
-let elapsedTime = 0; // Variable to store the elapsed time
 
 
 function hole(x, y){
@@ -322,21 +319,10 @@ function water(){
         if(score >= 5){
           window.location.href = "../images/WinningScreen.png"; 
         }
-
       } 
   }
  //end code
  
-
-//Calculate the elapsed time
-  elapsedTime = millis() - startTime;
-
-//Check if 30 seconds have passed 
-  if (elapsedTime >= 5000) {
-    window.location.href = "../LoseLevel2/lose2.html"; 
-  }
-
-  
 }
 
 
@@ -354,10 +340,21 @@ function draw(){
     
 
    
-  // Display the timer
-  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
  //set timer to white color then chage to red when 10 seconds are
+
+
+//Calculate the elapsed time
+elapsedTime = millis() - startTime;
+
+//Check if 30 seconds have passed 
+  if (elapsedTime >= 30000) {
+    window.location.href = "../LoseLevel2/lose2.html"; 
+  }
+
+// Display the timer
+let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  
 
  //the following code was helped by chatGpt
 push();
