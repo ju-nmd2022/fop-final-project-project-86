@@ -66,15 +66,9 @@ let player1Image;
 let player2Image;
 
 //player1
-<<<<<<< HEAD
-let p1X = 50;
-let p1Y = 51;
-let p1Width = 60;
-=======
 let p1X = 60;
 let p1Y = 50;
 let p1Width = 40;
->>>>>>> 8d3131a247052a382d546ed88fb3f751f9616842
 let p1Height = 50;
 let player1 = {
 
@@ -90,11 +84,7 @@ let player1 = {
 //player2
 let p2X = 15;
 let p2Y = 50;
-<<<<<<< HEAD
-let p2Width = 60;
-=======
 let p2Width = 45;
->>>>>>> 8d3131a247052a382d546ed88fb3f751f9616842
 let p2Height = 50;
 let player2 = {
   jump: false,
