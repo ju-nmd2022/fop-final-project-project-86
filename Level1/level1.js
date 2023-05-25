@@ -66,10 +66,10 @@ let player1Image;
 let player2Image;
 
 //player1
-let p1X = 50;
+let p1X = 70;
 let p1Y = 51;
-let p1Width = 60;
-let p1Height = 50;
+let p1Width = 40;
+let p1Height = 45;
 let player1 = {
 
   jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
@@ -82,10 +82,10 @@ let player1 = {
 };
 
 //player2
-let p2X = 20;
+let p2X = 10;
 let p2Y = 50;
-let p2Width = 60;
-let p2Height = 50;
+let p2Width = 48;
+let p2Height = 45;
 let player2 = {
   jump: false,
   ready: false, //am I ready to jump
@@ -340,6 +340,12 @@ function draw() {
   if (keyIsDown(65)) {
     //moving player2 - left
     p2X = p2X - 4;
+    //Flip image
+   push();  //Save the current state of transformation
+   translate(p2X + p2Width/2 + 7, p2Y + p2Height/2);  //Translate to the center of the image
+   scale(-1,1);  //Flip the image
+   image(player2Image, -p2Width/2, -p2Height/2, p2Width, p2Height);  //Draw the image centered at the origin
+   pop();  //Restore the state of transformation
     if (checkCollision()) {
       p2X = p2X + 4;
     }
@@ -451,10 +457,10 @@ function draw() {
   } else {
     fill(158, 115, 41); // Set the color to light brown
   }
-  ellipse(550, 45, 180, 60);
+  ellipse(550, 30, 180, 40);
   fill(255, 255, 255);
   textSize(25);
-  text("Time: " + remainingTime, 500, 50);
+  text("Time: " + remainingTime, 500, 40);
   pop();  
 
 
