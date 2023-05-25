@@ -35,8 +35,8 @@ let p2Speed = 3;
 let seed1X = p1X;
 let seed1Y = p1Y;
 let seed1Position = 0; //keeping track of where the seed is at the moment
-let seedWidth = 20;
-let seedHeight = 10;
+let seedWidth = 20 + pWidth;
+let seedHeight = 10 + pHeight/2;
 let seedSpeed = 20;
 let fire = false; //am i firing the seed?
 
@@ -44,12 +44,10 @@ let fire = false; //am i firing the seed?
 let waterX = p2X;
 let waterY = p2Y;
 let waterPosition = 0; //keeping track of where the seed is at the moment
-let waterWidth = 15;
-let waterHeight = 20;
+let waterWidth = 15 + p2Width;
+let waterHeight = 20 + p2Height;
 let waterSpeed = 20;
 let fire2 = false; //am i firing the seed?
-
-
 
 //ground hole
 let g1X = 500;
@@ -63,7 +61,6 @@ let hole1X = 500;
 let hole1Y = 180;
 let holeWidth = 40;
 let holeHeight = 40;
-
 
 //hole with water droplets
 let flower2B = 500;
@@ -104,9 +101,8 @@ function hole(x, y){
   ellipse(x, y, 18, 10);
   pop();
   } 
-  
-  
-  
+    
+ 
 function flower(x, y){
 //draw flower in the ground
   push();
@@ -117,8 +113,7 @@ function flower(x, y){
     
   // fill(99, 68, 14);
   // ellipse(b, c, 20);
-    
-    
+        
   noStroke();
   
 //petals
@@ -138,9 +133,7 @@ function flower(x, y){
   line(x + 49, y + 12, x + 50, y+ 45);
   pop();
 }  
-  
-  
-  
+    
 function seeds(){
 //seed positions
   //0 = with player1 ready to be fired
@@ -237,7 +230,7 @@ function water(){
 
 
   //LEVEL 2
-  function game() {
+function game() {
 
   //player1 - seed character    
   //player2 - water character
@@ -317,7 +310,7 @@ function water(){
         seedHit = false;
         waterHit = false;
         if(score >= 5){
-          window.location.href = "../images/WinningScreen.png"; 
+          window.location.href = "../images/winningScreen.png"; 
         }
       } 
   }
@@ -341,8 +334,7 @@ function draw(){
 
    
   
- //set timer to white color then chage to red when 10 seconds are
-
+//set timer to white color then chage to red when 10 seconds are
 
 //Calculate the elapsed time
 elapsedTime = millis() - startTime;
@@ -371,9 +363,6 @@ push();
 }  
 
  
-
-
-
 //make the player1 and player2 move up and down
 function keyPressedChecked(){
     
@@ -417,10 +406,11 @@ function keyTyped(){
 
 function preload() {
   backgroundImage = loadImage("../images/level2 Newbackground.png"); // Load the background image
-  player1Image = loadImage("../images/player1Right.png");
+  player1Image = loadImage("../images/character1Right.png");
   player2Image = loadImage("../images/player2Right.png");
 }
 
 
-
+//References: 
 //codes inspired by https://www.youtube.com/watch?v=NFIUnssR65g&list=PLBDInqUM5B25FzygoJ9Ifg1TZXmIHz4zh&index=3
+//chat GPT
