@@ -207,7 +207,7 @@ function water(){
         pop();  
         
         //if it misses
-        if(waterX >= windowWidth){
+        if(waterX >= 1200){
           waterPosition = 3; //reload
         }
     
