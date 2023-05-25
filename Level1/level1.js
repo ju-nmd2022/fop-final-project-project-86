@@ -286,7 +286,7 @@ function gravity() {
 
 ///PRELOAD
 function preload() {
-  player1Image = loadImage("../images/player1.png");
+  player1Image = loadImage("../images/character1Right.png");
   player2Image = loadImage("../images/player2.png");
   backgroundImage = loadImage("../images/background2.png"); // Load the background image
   //5:20

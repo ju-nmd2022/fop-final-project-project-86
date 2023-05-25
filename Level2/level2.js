@@ -1,7 +1,7 @@
 
 function setup() {
   createCanvas(1200, 700);
-  // startTime = millis(); // Store the start time
+  startTime = millis(); // Store the start time
   // imageMode(CENTER);
 }  
 
@@ -32,24 +32,22 @@ let p2Height = 180;
 let p2Speed = 3;
 
 //seed
-let seed1X = p1X;
-let seed1Y = p1Y;
+let seed1X = p1X + pWidth;
+let seed1Y = p1Y + pHeight/2;
 let seed1Position = 0; //keeping track of where the seed is at the moment
-let seedWidth = 20;
-let seedHeight = 10;
+let seedWidth = 20; 
+let seedHeight = 10; 
 let seedSpeed = 20;
 let fire = false; //am i firing the seed?
 
 //water droplets
-let waterX = p2X;
-let waterY = p2Y;
+let waterX = p2X + p2Width;
+let waterY = p2Y + p2Height/2;
 let waterPosition = 0; //keeping track of where the seed is at the moment
-let waterWidth = 15;
-let waterHeight = 20;
+let waterWidth = 15; 
+let waterHeight = 20; 
 let waterSpeed = 20;
 let fire2 = false; //am i firing the seed?
-
-
 
 //ground hole
 let g1X = 500;
@@ -64,12 +62,14 @@ let hole1Y = 180;
 let holeWidth = 40;
 let holeHeight = 40;
 
-
 //hole with water droplets
 let flower2B = 500;
 let flower2C = 180;
 let flowerWidth = 40;
 let flowerHeight = 40; 
+
+let startTime; // Variable to store the start time
+let elapsedTime = 0; // Variable to store the elapsed time
 
 
 let groundArray = [{
@@ -91,12 +91,6 @@ let flowerGroundArray = [{
 ];
 
 
-
-
-let startTime; // Variable to store the start time
-let elapsedTime = 0; // Variable to store the elapsed time
-
-
 function hole(x, y){
 //draw hole with seed
   push();
@@ -107,9 +101,8 @@ function hole(x, y){
   ellipse(x, y, 18, 10);
   pop();
   } 
-  
-  
-  
+    
+ 
 function flower(x, y){
 //draw flower in the ground
   push();
@@ -120,8 +113,7 @@ function flower(x, y){
     
   // fill(99, 68, 14);
   // ellipse(b, c, 20);
-    
-    
+        
   noStroke();
   
 //petals
@@ -141,9 +133,7 @@ function flower(x, y){
   line(x + 49, y + 12, x + 50, y+ 45);
   pop();
 }  
-  
-  
-  
+    
 function seeds(){
 //seed positions
   //0 = with player1 ready to be fired
@@ -179,8 +169,8 @@ function seeds(){
     }
     else{
       //when you are not firing, the seed should be with p1
-      seed1Y = p1Y;
-      seed1X = p1X;
+      seed1Y = p1Y + pHeight/2; //for the seed to shoot in the middle of the character
+      seed1X = p1X + pWidth;
       
     }
   
@@ -217,14 +207,14 @@ function water(){
         pop();  
         
         //if it misses
-        if(waterX >= windowWidth){
+        if(waterX >= 1200){
           waterPosition = 3; //reload
         }
     
       }
       else{
         //when you are not firing, the droplet should be with p1
-        waterY = p2Y;
+        waterY = p2Y + p2Height/2; //for the water to shoot in the middle of the character
         waterX = p2X;
         
       }
@@ -240,7 +230,7 @@ function water(){
 
 
   //LEVEL 2
-  function game() {
+function game() {
 
   //player1 - seed character    
   //player2 - water character
@@ -320,23 +310,12 @@ function water(){
         seedHit = false;
         waterHit = false;
         if(score >= 5){
-          window.location.href = "../images/WinningScreen.png"; 
+          window.location.href = "../images/winningScreen.png"; 
         }
-
       } 
   }
  //end code
  
-
-//Calculate the elapsed time
-  elapsedTime = millis() - startTime;
-
-//Check if 30 seconds have passed 
-  if (elapsedTime >= 5000) {
-    window.location.href = "../LoseLevel2/lose2.html"; 
-  }
-
-  
 }
 
 
@@ -354,10 +333,20 @@ function draw(){
     
 
    
-  // Display the timer
-  let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
   
- //set timer to white color then chage to red when 10 seconds are
+//set timer to white color then chage to red when 10 seconds are
+
+//Calculate the elapsed time
+elapsedTime = millis() - startTime;
+
+//Check if 30 seconds have passed 
+  if (elapsedTime >= 30000) {
+    window.location.href = "../LoseLevel2/lose2.html"; 
+  }
+
+// Display the timer
+let remainingTime = 30 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
+  
 
  //the following code was helped by chatGpt
 push();
@@ -374,9 +363,6 @@ push();
 }  
 
  
-
-
-
 //make the player1 and player2 move up and down
 function keyPressedChecked(){
     
@@ -420,10 +406,11 @@ function keyTyped(){
 
 function preload() {
   backgroundImage = loadImage("../images/level2 Newbackground.png"); // Load the background image
-  player1Image = loadImage("../images/player1Right.png");
+  player1Image = loadImage("../images/character1Right.png");
   player2Image = loadImage("../images/player2Right.png");
 }
 
 
-
+//References: 
 //codes inspired by https://www.youtube.com/watch?v=NFIUnssR65g&list=PLBDInqUM5B25FzygoJ9Ifg1TZXmIHz4zh&index=3
+//chat GPT
