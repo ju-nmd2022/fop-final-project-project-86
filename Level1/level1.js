@@ -9,7 +9,7 @@ function setup() {
     new Rectangle(420, 290, 200, 20),
     new Rectangle(700, 290, 500, 20),
     new Rectangle(310, 290, 20, 130),
-    new Rectangle(605, 290, 20, 130),
+    new Rectangle(600, 290, 20, 130),
     new Rectangle(0, 160, 1090, 20),
     new Rectangle(0, 30, 1200, 20), //top border
     new Rectangle(-15, 0, 20, 700), //left border
@@ -20,10 +20,10 @@ function setup() {
   next = new Next(1110, 620, 80, 60);
 
   traps = [
-    new Trap(810, 677, 100, 23),
-    new Trap(300, 677, 100, 23),
-    new Trap(400, 547, 100, 23),
-    new Trap(842, 547, 100, 23),
+    new Trap(810, 677, 95, 23),
+    new Trap(300, 677, 95, 23),
+    new Trap(405, 547, 95, 23),
+    new Trap(842, 547, 95, 23),
   ];
 
   seeds = [

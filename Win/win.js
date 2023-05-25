@@ -7,7 +7,7 @@ function setup() {
     button.size(240, 95); 
     button.mousePressed(goToLevel1);
     button.style("background-color", "transparent");
-    //button.style("border", "none");
+    button.style("border", "none");
 }
 
 
