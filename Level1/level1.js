@@ -285,31 +285,6 @@ function gravity() {
 }
 
 
-//creating the snow
-function createSnow() {
-  const x = Math.random() * width;
-  const y = Math.random() * height;
-  const v = 0.2 + Math.random();
-  return { x: x, y: y, velocity: v };
-}
-
-function drawSnow(snow) {
-  push();
-  translate(snow.x, snow.y);
-  noStroke();
-  fill(255, 255, 255, 290);
-  ellipse(0, 0, 6);
-  pop();
-}
-
-function updateSnow(snow) {
-  snow.y = snow.y + snow.velocity;
-}
-
-for (let i = 0; i < 600; i++) {
-  const snow = createSnow();
-  snows.push(snow);
-}
 
 ///PRELOAD
 function preload() {
@@ -493,10 +468,7 @@ function draw() {
   // text("Time: " + remainingTime, 500, 35);
   // pop();
 
-  for (let snow of snows) {
-  drawSnow(snow);
-  updateSnow(snow);
-  }
+  
 
 }
 
