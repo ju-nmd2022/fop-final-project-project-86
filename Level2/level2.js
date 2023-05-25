@@ -310,7 +310,7 @@ function game() {
         seedHit = false;
         waterHit = false;
         if(score >= 5){
-          window.location.href = "../images/winningScreen.png"; 
+          window.location.href = "../Win/win.html"; 
         }
       } 
   }
