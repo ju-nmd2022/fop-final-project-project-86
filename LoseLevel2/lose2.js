@@ -12,7 +12,7 @@ function setup() {
 
 
 function preload() {
-    backgroundImage = loadImage('../images/lose-screen.png'); // Load the background image
+    backgroundImage = loadImage('../images/losingScreen.png'); // Load the background image
   }
 
 

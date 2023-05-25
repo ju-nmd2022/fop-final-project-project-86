@@ -68,8 +68,8 @@ let player2Image;
 //player1
 let p1X = 50;
 let p1Y = 51;
-let p1Width = 20;
-let p1Height = 35;
+let p1Width = 60;
+let p1Height = 50;
 let player1 = {
 
   jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
@@ -84,8 +84,8 @@ let player1 = {
 //player2
 let p2X = 20;
 let p2Y = 50;
-let p2Width = 20;
-let p2Height = 35;
+let p2Width = 60;
+let p2Height = 50;
 let player2 = {
   jump: false,
   ready: false, //am I ready to jump
@@ -286,8 +286,8 @@ function gravity() {
 
 ///PRELOAD
 function preload() {
-  player1Image = loadImage("../images/character1Right.png");
-  player2Image = loadImage("../images/player2.png");
+  player1Image = loadImage("../images/seed.png");
+  player2Image = loadImage("../images/water.png");
   backgroundImage = loadImage("../images/background2.png"); // Load the background image
   //5:20
 }
@@ -445,13 +445,26 @@ function draw() {
 
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
 
-  push();
-  fill(158, 115, 41);
-  ellipse(550, 25, 180, 48);
+
+  if (remainingTime <= 10) {
+    fill(255, 0, 0); // Set the color to red
+  } else {
+    fill(158, 115, 41); // Set the color to light brown
+  }
+  ellipse(550, 45, 180, 60);
   fill(255, 255, 255);
   textSize(25);
-  text("Time: " + remainingTime, 500, 35);
-  pop();
+  text("Time: " + remainingTime, 500, 50);
+  pop();  
+
+
+  // push();
+  // fill(158, 115, 41);
+  // ellipse(550, 25, 180, 48);
+  // fill(255, 255, 255);
+  // textSize(25);
+  // text("Time: " + remainingTime, 500, 35);
+  // pop();
 }
 
 // Define a custom Rectangle object

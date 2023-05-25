@@ -20,15 +20,15 @@ let player2Image;
 //player1
 let p1X = 150;
 let p1Y = 200;
-let pWidth = 120;
-let pHeight = 180;
+let pWidth = 100;
+let pHeight = 140;
 let pSpeed = 3;
 
 //player
 let p2X = 150;  
 let p2Y = 300; 
-let p2Width = 120;
-let p2Height = 180;
+let p2Width = 100;
+let p2Height = 140;
 let p2Speed = 3;
 
 //seed
@@ -406,8 +406,8 @@ function keyTyped(){
 
 function preload() {
   backgroundImage = loadImage("../images/level2 Newbackground.png"); // Load the background image
-  player1Image = loadImage("../images/character1Right.png");
-  player2Image = loadImage("../images/player2Right.png");
+  player1Image = loadImage("../images/seed.png");
+  player2Image = loadImage("../images/water.png");
 }
 
 
