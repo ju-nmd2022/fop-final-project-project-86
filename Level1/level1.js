@@ -118,6 +118,10 @@ let elapsedTime = 0; // Variable to store the elapsed time
 let upKeyPressedTime1 = 0;
 let upKeyPressedTime2 = 0;
 
+
+
+
+
 ///LEVEL1
 function game() {
   //background(150, 230, 240);
@@ -353,7 +357,7 @@ function draw() {
     //moving player2 - right
     p2X = p2X + 4;
     if (checkCollision()) {
-      p2X = p2X - 4;
+      p2X = p2X + 4;
     }
   }
   if (keyIsDown(87)) {
