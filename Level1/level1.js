@@ -82,7 +82,7 @@ let player1 = {
 };
 
 //player2
-let p2X = 50;
+let p2X = 20;
 let p2Y = 50;
 let p2Width = 40;
 let p2Height = 50;
@@ -340,6 +340,12 @@ function draw() {
   if (keyIsDown(65)) {
     //moving player2 - left
     p2X = p2X - 4;
+    //Flip image
+   push();  //Save the current state of transformation
+   translate(p2X + p2Width/2 + 7, p2Y + p2Height/2);  //Translate to the center of the image
+   scale(-1,1);  //Flip the image
+   image(player2Image, -p2Width/2, -p2Height/2, p2Width, p2Height);  //Draw the image centered at the origin
+   pop();  //Restore the state of transformation
     if (checkCollision()) {
       p2X = p2X + 4;
     }
