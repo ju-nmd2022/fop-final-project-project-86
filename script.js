@@ -13,7 +13,7 @@ button.style("border", "none");
 
 
 function preload() {
-  backgroundImage = loadImage('./images/start-screen.png'); // Load the background image
+  backgroundImage = loadImage('./images/welcomingScreen.png'); // Load the background image
 }
 
 
