@@ -2,9 +2,12 @@ function setup() {
     createCanvas(1200, 700);
 
     // Create the button
-  button = createButton("Click here to play again");
-  button.position(500, 650);
-  button.mousePressed(goToLevel1);
+    button = createButton("");
+    button.position(925, 560);
+    button.size(240, 95); 
+    button.mousePressed(goToLevel1);
+    button.style("background-color", "transparent");
+    //button.style("border", "none");
 }
 
 
@@ -19,5 +22,5 @@ function draw() {
 
  // Function to handle button click
 function goToLevel1() {
-    window.location.href = "../index.html"; // Redirect to level1.html
+    window.location.href = "../index.html"; // Redirect to the start
   }

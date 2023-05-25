@@ -22,5 +22,5 @@ function draw() {
 
  // Function to handle button click
 function goToLevel1() {
-    window.location.href = "../Level2/level2.html"; // Redirect to level1.html
+    window.location.href = "../PreLevel2/prelevel2.html"; // Redirect to level1.html
   }
