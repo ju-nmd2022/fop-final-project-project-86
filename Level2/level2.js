@@ -32,20 +32,20 @@ let p2Height = 180;
 let p2Speed = 3;
 
 //seed
-let seed1X = p1X;
-let seed1Y = p1Y;
+let seed1X = p1X + pWidth;
+let seed1Y = p1Y + pHeight/2;
 let seed1Position = 0; //keeping track of where the seed is at the moment
-let seedWidth = 20 + pWidth;
-let seedHeight = 10 + pHeight/2;
+let seedWidth = 20; 
+let seedHeight = 10; 
 let seedSpeed = 20;
 let fire = false; //am i firing the seed?
 
 //water droplets
-let waterX = p2X;
-let waterY = p2Y;
+let waterX = p2X + p2Width;
+let waterY = p2Y + p2Height/2;
 let waterPosition = 0; //keeping track of where the seed is at the moment
-let waterWidth = 15 + p2Width;
-let waterHeight = 20 + p2Height;
+let waterWidth = 15; 
+let waterHeight = 20; 
 let waterSpeed = 20;
 let fire2 = false; //am i firing the seed?
 
@@ -169,8 +169,8 @@ function seeds(){
     }
     else{
       //when you are not firing, the seed should be with p1
-      seed1Y = p1Y;
-      seed1X = p1X;
+      seed1Y = p1Y + pHeight/2; //for the seed to shoot in the middle of the character
+      seed1X = p1X + pWidth;
       
     }
   
@@ -214,7 +214,7 @@ function water(){
       }
       else{
         //when you are not firing, the droplet should be with p1
-        waterY = p2Y;
+        waterY = p2Y + p2Height/2; //for the water to shoot in the middle of the character
         waterX = p2X;
         
       }
