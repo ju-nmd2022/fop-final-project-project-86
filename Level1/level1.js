@@ -483,7 +483,7 @@ function Rectangle(x, y, width, height) {
   this.display = function () {
     // Draw the rectangle using p5.js rect() function
     fill(255, 255, 255, 0.5);
-    //noStroke();
+    noStroke();
     rect(this.x, this.y, this.width, this.height);
   };
 }
