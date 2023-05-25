@@ -66,9 +66,9 @@ let player1Image;
 let player2Image;
 
 //player1
-let p1X = 60;
-let p1Y = 50;
-let p1Width = 40;
+let p1X = 50;
+let p1Y = 51;
+let p1Width = 60;
 let p1Height = 50;
 let player1 = {
 
@@ -82,9 +82,9 @@ let player1 = {
 };
 
 //player2
-let p2X = 15;
+let p2X = 20;
 let p2Y = 50;
-let p2Width = 45;
+let p2Width = 60;
 let p2Height = 50;
 let player2 = {
   jump: false,
@@ -284,33 +284,6 @@ function gravity() {
   }
 }
 
-
-//creating the snow
-function createSnow() {
-  const x = Math.random() * width;
-  const y = Math.random() * height;
-  const v = 0.2 + Math.random();
-  return { x: x, y: y, velocity: v };
-}
-
-function drawSnow(snow) {
-  push();
-  translate(snow.x, snow.y);
-  noStroke();
-  fill(255, 255, 255, 290);
-  ellipse(0, 0, 6);
-  pop();
-}
-
-function updateSnow(snow) {
-  snow.y = snow.y + snow.velocity;
-}
-
-for (let i = 0; i < 600; i++) {
-  const snow = createSnow();
-  snows.push(snow);
-}
-
 ///PRELOAD
 function preload() {
   player1Image = loadImage("../images/seed.png");
@@ -492,12 +465,6 @@ function draw() {
   // textSize(25);
   // text("Time: " + remainingTime, 500, 35);
   // pop();
-
-  for (let snow of snows) {
-  drawSnow(snow);
-  updateSnow(snow);
-  }
-
 }
 
 // Define a custom Rectangle object
