@@ -20,10 +20,10 @@ function setup() {
   next = new Next(1110, 620, 80, 60);
 
   traps = [
-    new Trap(820, 677, 80, 23),
-    new Trap(310, 677, 80, 23),
-    new Trap(410, 547, 80, 23),
-    new Trap(852, 547, 80, 23),
+    new Trap(810, 677, 100, 23),
+    new Trap(300, 677, 100, 23),
+    new Trap(400, 547, 100, 23),
+    new Trap(842, 547, 100, 23),
   ];
 
   seeds = [
@@ -68,8 +68,8 @@ let player2Image;
 //player1
 let p1X = 50;
 let p1Y = 51;
-let p1Width = 45;
-let p1Height = 53;
+let p1Width = 60;
+let p1Height = 50;
 let player1 = {
 
   jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
@@ -84,7 +84,7 @@ let player1 = {
 //player2
 let p2X = 20;
 let p2Y = 50;
-let p2Width = 40;
+let p2Width = 60;
 let p2Height = 50;
 let player2 = {
   jump: false,
@@ -340,12 +340,6 @@ function draw() {
   if (keyIsDown(65)) {
     //moving player2 - left
     p2X = p2X - 4;
-    //Flip image
-   push();  //Save the current state of transformation
-   translate(p2X + p2Width/2 + 7, p2Y + p2Height/2);  //Translate to the center of the image
-   scale(-1,1);  //Flip the image
-   image(player2Image, -p2Width/2, -p2Height/2, p2Width, p2Height);  //Draw the image centered at the origin
-   pop();  //Restore the state of transformation
     if (checkCollision()) {
       p2X = p2X + 4;
     }
@@ -446,6 +440,9 @@ function draw() {
 
   // Display the timer
 
+  
+  
+
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
 
 
@@ -454,10 +451,10 @@ function draw() {
   } else {
     fill(158, 115, 41); // Set the color to light brown
   }
-  ellipse(550, 30, 180, 50);
+  ellipse(550, 45, 180, 60);
   fill(255, 255, 255);
   textSize(25);
-  text("Time: " + remainingTime, 500, 40);
+  text("Time: " + remainingTime, 500, 50);
   pop();  
 
 
