@@ -10,7 +10,7 @@ button.mousePressed(goToLevel1);
 button.style("background-color", "transparent");
 button.style("border", "none");
 }
-
+   
 
 function preload() {
   backgroundImage = loadImage('./images/welcomingScreen.png'); // Load the background image
