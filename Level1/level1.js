@@ -68,8 +68,8 @@ let player2Image;
 //player1
 let p1X = 50;
 let p1Y = 51;
-let p1Width = 60;
-let p1Height = 50;
+let p1Width = 45;
+let p1Height = 53;
 let player1 = {
 
   jump: false, //the stage when its on the ground, 1: jumping upwards, 2: fall
@@ -82,9 +82,9 @@ let player1 = {
 };
 
 //player2
-let p2X = 20;
+let p2X = 50;
 let p2Y = 50;
-let p2Width = 60;
+let p2Width = 40;
 let p2Height = 50;
 let player2 = {
   jump: false,
