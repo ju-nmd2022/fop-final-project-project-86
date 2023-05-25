@@ -20,10 +20,10 @@ function setup() {
   next = new Next(1110, 620, 80, 60);
 
   traps = [
-    new Trap(810, 677, 100, 23),
-    new Trap(300, 677, 100, 23),
-    new Trap(400, 547, 100, 23),
-    new Trap(842, 547, 100, 23),
+    new Trap(820, 677, 80, 23),
+    new Trap(310, 677, 80, 23),
+    new Trap(410, 547, 80, 23),
+    new Trap(852, 547, 80, 23),
   ];
 
   seeds = [
@@ -480,7 +480,7 @@ function Rectangle(x, y, width, height) {
   this.display = function () {
     // Draw the rectangle using p5.js rect() function
     fill(255, 255, 255, 0.5);
-    noStroke();
+    //noStroke();
     rect(this.x, this.y, this.width, this.height);
   };
 }
