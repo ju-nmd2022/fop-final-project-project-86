@@ -27,7 +27,7 @@ let pSpeed = 3;
 //player
 let p2X = 150;  
 let p2Y = 300; 
-let p2Width = 100;
+let p2Width = 120;
 let p2Height = 140;
 let p2Speed = 3;
 
