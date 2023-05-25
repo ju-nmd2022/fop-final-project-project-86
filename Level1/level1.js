@@ -297,7 +297,7 @@ function drawSnow(snow) {
   push();
   translate(snow.x, snow.y);
   noStroke();
-  fill(255, 255, 255);
+  fill(255, 255, 255, 290);
   ellipse(0, 0, 6);
   pop();
 }
@@ -495,6 +495,12 @@ function draw() {
   // textSize(25);
   // text("Time: " + remainingTime, 500, 35);
   // pop();
+
+  for (let snow of snows) {
+  drawSnow(snow);
+  updateSnow(snow);
+  }
+
 }
 
 // Define a custom Rectangle object
