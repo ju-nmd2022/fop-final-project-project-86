@@ -468,13 +468,6 @@ function draw() {
   pop();  
 
 
-  // push();
-  // fill(158, 115, 41);
-  // ellipse(550, 25, 180, 48);
-  // fill(255, 255, 255);
-  // textSize(25);
-  // text("Time: " + remainingTime, 500, 35);
-  // pop();
 }
 
 // Define a custom Rectangle object
@@ -560,6 +553,8 @@ function Next(x, y, width, height) {
   };
 }
 
-//References:
 
-//timer: chat gpt
+//References:
+//chat gpt
+//https://www.youtube.com/watch?v=FZlpuQeCvlk&list=PLBDInqUM5B26FjwMMZqGDxqQr1kX5V9Ul
+//help of the teaching assistants 
