@@ -446,9 +446,6 @@ function draw() {
 
   // Display the timer
 
-  
-  
-
   let remainingTime = 50 - Math.floor(elapsedTime / 1000); // Calculate remaining time in seconds
 
 
@@ -457,10 +454,10 @@ function draw() {
   } else {
     fill(158, 115, 41); // Set the color to light brown
   }
-  ellipse(550, 45, 180, 60);
+  ellipse(550, 30, 180, 50);
   fill(255, 255, 255);
   textSize(25);
-  text("Time: " + remainingTime, 500, 50);
+  text("Time: " + remainingTime, 500, 40);
   pop();  
 
 
